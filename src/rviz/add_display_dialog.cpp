@@ -51,6 +51,15 @@
 
 #include "display_factory.h"
 
+
+
+namespace mirko{
+    namespace names{   
+        bool validate(std::string,std::string){return true;};
+    }
+}
+
+
 namespace rviz
 {
 
@@ -79,26 +88,26 @@ struct LexicalTopicInfo {
 bool isSubtopic( const std::string &base, const std::string &topic )
 {
   std::string error;
-  if ( !ros::names::validate(base, error) )
+  if ( !mirko::names::validate(base, error) )
   {
     ROS_ERROR_STREAM("isSubtopic() Invalid basename: " << error);
     return false;
   }
-  if ( !ros::names::validate(topic, error) )
+  if ( !mirko::names::validate(topic, error) )
   {
     ROS_ERROR_STREAM("isSubtopic() Invalid topic: " << error);
     return false;
   }
 
   std::string query = topic;
-  while ( query != "/" )
+  /*while ( query != "/" )
   {
     if ( query == base )
     {
       return true;
     }
     query = ros::names::parentNamespace( query );
-  }
+  }*/
   return false;
 }
 

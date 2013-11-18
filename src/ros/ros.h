@@ -6,7 +6,6 @@
 
 //#include </opt/ros/hydro/include/ros/ros.h>
 
-
 #include "ros/time.h"
 #include "ros/rate.h"
 //#define ROSCONSOLE_ROSCONSOLE_H
@@ -27,7 +26,7 @@
 #include "ros/this_node.h"
 #include "ros/param.h"
 #include "ros/topic.h"
-#include "ros/names.h"
+// #include "ros/names.h"
 
 #include <assert.h>
 

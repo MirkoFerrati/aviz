@@ -62,6 +62,9 @@
 #include "rviz/robot/robot_link.h"
 #include "rviz/robot/robot_joint.h"
 
+#define ROS_PACKAGE_NAME "mirko"
+
+
 namespace fs=boost::filesystem;
 
 namespace rviz

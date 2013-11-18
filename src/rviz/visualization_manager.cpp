@@ -78,6 +78,8 @@
 #include "rviz/visualization_manager.h"
 #include "rviz/window_manager_interface.h"
 
+#include <ros/ros.h>
+
 namespace rviz
 {
 

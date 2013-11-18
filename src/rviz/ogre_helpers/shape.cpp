@@ -39,6 +39,9 @@
 #include <OGRE/OgreTextureManager.h>
 #include <stdint.h>
 
+#define ROS_PACKAGE_NAME "mirko"
+
+
 namespace rviz
 {
 

@@ -33,6 +33,8 @@
 
 #include <tinyxml.h>
 
+#include <ros/ros.h>
+
 namespace rviz
 {
 

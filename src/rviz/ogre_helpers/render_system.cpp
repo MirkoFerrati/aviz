@@ -45,7 +45,7 @@
 
 #include <ros/package.h> // This dependency should be moved out of here, it is just used for a search path.
 #include <ros/console.h>
-
+#include <ros/ros.h>
 #include <OGRE/OgreRenderWindow.h>
 
 #include "rviz/env_config.h"
@@ -54,6 +54,9 @@
 #include "rviz/ogre_helpers/render_system.h"
 
 #include <QMessageBox>
+
+#define ROS_PACKAGE_NAME "/home/mirko/"
+
 
 namespace rviz
 {

@@ -33,8 +33,12 @@
 #ifndef Q_MOC_RUN
 # include <boost/shared_ptr.hpp>
 # include <boost/thread/mutex.hpp>
-
+namespace ros{
+    class Duration;
+    extern Duration DURATION_MAX;
+}
 # include <ros/ros.h>
+# include "ros/time.h"
 # include <image_transport/image_transport.h>
 # include <image_transport/subscriber_filter.h>
 # include <message_filters/subscriber.h>

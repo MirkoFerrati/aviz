@@ -87,6 +87,8 @@
 
 #include "rviz/visualization_frame.h"
 
+#include <ros/ros.h>
+
 namespace fs = boost::filesystem;
 
 #define CONFIG_EXTENSION "rviz"

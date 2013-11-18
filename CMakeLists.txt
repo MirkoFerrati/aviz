@@ -10,6 +10,8 @@ find_package(Boost REQUIRED
   thread
 )
 
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR})
+
 find_package(Eigen REQUIRED)
 
 find_package(PkgConfig REQUIRED)
@@ -36,68 +38,68 @@ find_package(Qt4 REQUIRED COMPONENTS QtCore QtGui QtOpenGL)
 
 find_package(urdfdom REQUIRED)
 
-find_package(catkin REQUIRED
-  COMPONENTS
-  angles
-  geometry_msgs
-  image_geometry
-  image_transport
-  interactive_markers
-  laser_geometry
-  map_msgs
-  message_filters
-  nav_msgs
-  pluginlib
-  python_qt_binding
-  resource_retriever
-  rosbag
-  rosconsole
-  roscpp
-  roslib
-  rospy
-  sensor_msgs
-  std_msgs
-  std_srvs
-  tf
-  urdf
-  visualization_msgs
-)
-
-catkin_python_setup()
-
-catkin_package(
-  INCLUDE_DIRS
-    src
-    ${EIGEN_INCLUDE_DIRS}
-    ${OGRE_INCLUDE_DIRS}
-    ${OPENGL_INCLUDE_DIR}
-    ${urdfdom_INCLUDE_DIRS}
-  LIBRARIES
-    rviz
-    default_plugin
-    ${OGRE_LIBRARIES}
-    ${rviz_ADDITIONAL_LIBRARIES}
-    ${OPENGL_LIBRARIES}
-    ${urdfdom_LIBRARIES}
-  CATKIN_DEPENDS
-    geometry_msgs
-    image_geometry
-    image_transport
-    interactive_markers
-    laser_geometry
-    map_msgs
-    message_filters
-    nav_msgs
-    pluginlib
-    resource_retriever
-    roscpp
-    roslib
-    sensor_msgs
-    std_msgs
-    tf
-    urdf
-    visualization_msgs
-)
+# find_package(catkin REQUIRED
+#   COMPONENTS
+#   angles
+#   geometry_msgs
+#   image_geometry
+#   image_transport
+#   interactive_markers
+#   laser_geometry
+#   map_msgs
+#   message_filters
+#   nav_msgs
+#   pluginlib
+#   python_qt_binding
+#   resource_retriever
+#   rosbag
+#   rosconsole
+#   roscpp
+#   roslib
+#   rospy
+#   sensor_msgs
+#   std_msgs
+#   std_srvs
+#   tf
+#   urdf
+#   visualization_msgs
+# )
+# 
+# catkin_python_setup()
+# 
+# catkin_package(
+#   INCLUDE_DIRS
+#     src
+#     ${EIGEN_INCLUDE_DIRS}
+#     ${OGRE_INCLUDE_DIRS}
+#     ${OPENGL_INCLUDE_DIR}
+#     ${urdfdom_INCLUDE_DIRS}
+#   LIBRARIES
+#     rviz
+#     default_plugin
+#     ${OGRE_LIBRARIES}
+#     ${rviz_ADDITIONAL_LIBRARIES}
+#     ${OPENGL_LIBRARIES}
+#     ${urdfdom_LIBRARIES}
+#   CATKIN_DEPENDS
+#     geometry_msgs
+#     image_geometry
+#     image_transport
+#     interactive_markers
+#     laser_geometry
+#     map_msgs
+#     message_filters
+#     nav_msgs
+#     pluginlib
+#     resource_retriever
+#     roscpp
+#     roslib
+#     sensor_msgs
+#     std_msgs
+#     tf
+#     urdf
+#     visualization_msgs
+# )
 
 include_directories(SYSTEM
   ${EIGEN_INCLUDE_DIRS}
@@ -106,7 +108,12 @@ include_directories(SYSTEM
   ${PYTHON_INCLUDE_PATH}
   ${urdfdom_INCLUDE_DIRS}
 )
+include_directories(${EIGEN3_INCLUDE_DIR})
+message (STATUS "eigen include dir: " ${EIGEN3_INCLUDE_DIR})
+
 include_directories(src ${catkin_INCLUDE_DIRS})
+include_directories("/opt/ros/hydro/include")
+
 
 link_directories(${OGRE_LIBRARY_DIRS})
 
@@ -122,18 +129,18 @@ add_definitions(-DQT_NO_KEYWORDS)
 
 add_subdirectory(src)
 
-install(DIRECTORY ogre_media
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
-install(DIRECTORY icons
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
-install(DIRECTORY images
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
-install(FILES default.rviz
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
-install(FILES plugin_description.xml
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
+# install(DIRECTORY ogre_media
+#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+# )
+# install(DIRECTORY icons
+#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+# )
+# install(DIRECTORY images
+#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+# )
+# install(FILES default.rviz
+#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+# )
+# install(FILES plugin_description.xml
+#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+# )

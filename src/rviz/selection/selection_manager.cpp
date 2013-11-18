@@ -67,7 +67,7 @@
 
 #include "rviz/selection/selection_manager.h"
 #include <vector>
-
+#include <ros/ros.h>
 
 namespace rviz
 {

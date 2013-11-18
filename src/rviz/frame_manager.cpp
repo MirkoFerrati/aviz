@@ -32,9 +32,9 @@
 #include "properties/property.h"
 
 #include <tf/transform_listener.h>
-#include <ros/ros.h>
 
 #include <std_msgs/Float32.h>
+#include <ros/ros.h>
 
 namespace rviz
 {

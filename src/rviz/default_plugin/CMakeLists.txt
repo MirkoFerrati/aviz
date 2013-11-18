@@ -103,15 +103,17 @@ set(SOURCE_FILES
   view_controllers/fps_view_controller.cpp
   wrench_display.cpp
   wrench_visual.cpp
+  
+  ../../ros/time.cpp
   ${MOC_FILES}
 )
 
 add_library(default_plugin ${SOURCE_FILES})
 target_link_libraries(default_plugin ${PROJECT_NAME} ${catkin_LIBRARIES} ${QT_LIBRARIES} ${OGRE_LIBRARIES} ${Boost_LIBRARIES} ${urdfdom_LIBRARIES})
 
-install(TARGETS default_plugin
-  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
+# install(TARGETS default_plugin
+#   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
 
 #message("TODO: stop installing libdefault_plugin.so into share/rviz after pluginlib starts looking for it in lib.")
 #install(TARGETS default_plugin

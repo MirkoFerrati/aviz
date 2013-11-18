@@ -177,7 +177,7 @@ add_library( ${PROJECT_NAME}
   tool_properties_panel.cpp
   yaml_config_reader.cpp
   yaml_config_writer.cpp
-
+  ../ros/time.cpp
   ${ENV_CONFIG_FILE}
   ${MOC_FILES}
 )
@@ -191,6 +191,7 @@ target_link_libraries(${PROJECT_NAME}
   ${urdfdom_LIBRARIES}
   assimp
   yaml-cpp
+  tinyxml
 )
 
 if(APPLE)
@@ -229,10 +230,10 @@ target_link_libraries(executable ${PROJECT_NAME} ${QT_LIBRARIES} ${OGRE_LIBRARIE
 set_target_properties(executable
                       PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
 
-install(TARGETS executable ${PROJECT_NAME}
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-)
-install(DIRECTORY ./
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-  FILES_MATCHING PATTERN "*.h")
+# install(TARGETS executable ${PROJECT_NAME}
+#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+# )
+# install(DIRECTORY ./
+#   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+#   FILES_MATCHING PATTERN "*.h")

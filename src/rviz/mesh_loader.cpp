@@ -67,6 +67,8 @@
 
 namespace fs = boost::filesystem;
 
+#define ROS_PACKAGE_NAME "mirko"
+
 namespace rviz
 {
 

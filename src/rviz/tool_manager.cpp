@@ -31,7 +31,7 @@
 #include <QRegExp>
 
 #include <ros/assert.h>
-
+#include <ros/ros.h>
 #include "rviz/failed_tool.h"
 #include "rviz/properties/property.h"
 #include "rviz/properties/property_tree_model.h"

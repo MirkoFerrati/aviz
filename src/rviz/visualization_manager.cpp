@@ -559,10 +559,10 @@ void VisualizationManager::handleChar( QKeyEvent* event, RenderPanel* panel )
 
 void VisualizationManager::threadedQueueThreadFunc()
 {
-  while (!shutting_down_)
-  {
-    //private_->threaded_queue_.callOne(ros::WallDuration(0.1));
-  }
+//   while (!shutting_down_)
+//   {
+//     private_->threaded_queue_.callOne(ros::WallDuration(0.1));
+//   }
 }
 
 void VisualizationManager::notifyConfigChanged()

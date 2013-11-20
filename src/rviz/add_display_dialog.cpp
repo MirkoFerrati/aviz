@@ -126,6 +126,8 @@ void getPluginGroups( const QMap<QString, QString> &datatype_plugins,
                       QList<PluginGroup> *groups,
                       QList<ros::master::TopicInfo> *unvisualizable )
 {
+    return;
+    /*
   ros::master::V_TopicInfo all_topics;
   ros::master::getTopics( all_topics );
   std::sort( all_topics.begin(), all_topics.end(), LexicalTopicInfo() );
@@ -169,7 +171,7 @@ void getPluginGroups( const QMap<QString, QString> &datatype_plugins,
     {
       unvisualizable->append( *topic_it );
     }
-  }
+  }*/
 }
 
 // Dialog implementation

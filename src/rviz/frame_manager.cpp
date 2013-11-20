@@ -41,7 +41,7 @@ namespace rviz
 
 FrameManager::FrameManager()
 {
-  tf_.reset(new tf::TransformListener(ros::NodeHandle(), ros::Duration(10*60), false));
+//   tf_.reset(new tf::TransformListener(ros::NodeHandle(), ros::Duration(10*60), false));
   setSyncMode( SyncOff );
   setPause(false);
 }
@@ -163,8 +163,8 @@ bool FrameManager::adjustTime( const std::string &frame, ros::Time& time )
         // if we don't have tf info for the given timestamp, use the latest available
         ros::Time latest_time;
         std::string error_string;
-        int error_code;
-        error_code = tf_->getLatestCommonTime( fixed_frame_, frame, latest_time, &error_string );
+        int error_code=-1;
+//         error_code = tf_->getLatestCommonTime( fixed_frame_, frame, latest_time, &error_string );
 
         if ( error_code != 0 )
         {
@@ -231,9 +231,9 @@ bool FrameManager::transform(const std::string& frame, ros::Time time, const geo
 
   position = Ogre::Vector3::ZERO;
   orientation = Ogre::Quaternion::IDENTITY;
-
+return true;
   // put all pose data into a tf stamped pose
-  tf::Quaternion bt_orientation(pose_msg.orientation.x, pose_msg.orientation.y, pose_msg.orientation.z, pose_msg.orientation.w);
+ /* tf::Quaternion bt_orientation(pose_msg.orientation.x, pose_msg.orientation.y, pose_msg.orientation.z, pose_msg.orientation.w);
   tf::Vector3 bt_position(pose_msg.position.x, pose_msg.position.y, pose_msg.position.z);
 
   if (bt_orientation.x() == 0.0 && bt_orientation.y() == 0.0 && bt_orientation.z() == 0.0 && bt_orientation.w() == 0.0)
@@ -261,26 +261,28 @@ bool FrameManager::transform(const std::string& frame, ros::Time time, const geo
   bt_orientation = pose_out.getRotation();
   orientation = Ogre::Quaternion( bt_orientation.w(), bt_orientation.x(), bt_orientation.y(), bt_orientation.z() );
 
-  return true;
+  return true;*/
 }
 
 bool FrameManager::frameHasProblems(const std::string& frame, ros::Time time, std::string& error)
 {
-  if (!tf_->frameExists(frame))
-  {
-    error = "Frame [" + frame + "] does not exist";
-    if (frame == fixed_frame_)
-    {
-      error = "Fixed " + error;
-    }
-    return true;
-  }
+//   if (!tf_->frameExists(frame))
+//   {
+//     error = "Frame [" + frame + "] does not exist";
+//     if (frame == fixed_frame_)
+//     {
+//       error = "Fixed " + error;
+//     }
+//     return true;
+//   }
 
   return false;
 }
 
 bool FrameManager::transformHasProblems(const std::string& frame, ros::Time time, std::string& error)
 {
+    return false;
+    /*
   if ( !adjustTime(frame, time) )
   {
     return false;
@@ -311,7 +313,7 @@ bool FrameManager::transformHasProblems(const std::string& frame, ros::Time time
     error = ss.str();
   }
 
-  return !ok;
+  return !ok;*/
 }
 
 std::string getTransformStatusName(const std::string& caller_id)

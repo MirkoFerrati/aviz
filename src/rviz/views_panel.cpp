@@ -104,7 +104,7 @@ void ViewsPanel::setViewManager( ViewManager* view_man )
   {
     properties_view_->setModel( view_man_->getPropertyModel() );
 
-    QStringList ids = view_man_->getFactory()->getDeclaredClassIds();
+    QStringList ids;//TODO Mirko : static list instead of plugin one  = view_man_->getFactory()->getDeclaredClassIds();
     for( int i = 0; i < ids.size(); i++ )
     {
       const QString& id = ids[ i ];

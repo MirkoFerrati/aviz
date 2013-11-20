@@ -35,8 +35,12 @@
 
 #include <string>
 #include <vector>
+#include <ros/ros.h>
 
 #include <pluginlib/class_loader.h>
+
+#include <ros/ros.h>
+
 
 #include "rviz/class_id_recording_factory.h"
 #include "rviz/load_resource.h"
@@ -60,17 +64,17 @@ private:
 public:
   PluginlibFactory( const QString& package, const QString& base_class_type )
     {
-      class_loader_ = new pluginlib::ClassLoader<Type>( package.toStdString(), base_class_type.toStdString() );
+//       class_loader_ = new pluginlib::ClassLoader<Type>( package.toStdString(), base_class_type.toStdString() );
     }
   virtual ~PluginlibFactory()
     {
-      delete class_loader_;
+//       delete class_loader_;
     }
 
   virtual QStringList getDeclaredClassIds()
     {
       QStringList ids;
-      std::vector<std::string> std_ids = class_loader_->getDeclaredClasses();
+      std::vector<std::string> std_ids; //= class_loader_->getDeclaredClasses();
       for( size_t i = 0; i < std_ids.size(); i++ )
       {
         ids.push_back( QString::fromStdString( std_ids[ i ]));
@@ -90,7 +94,7 @@ public:
       {
         return iter->description_;
       }
-      return QString::fromStdString( class_loader_->getClassDescription( class_id.toStdString() ));
+//       return QString::fromStdString( class_loader_->getClassDescription( class_id.toStdString() ));
     }
 
   virtual QString getClassName( const QString& class_id ) const
@@ -100,7 +104,7 @@ public:
       {
         return iter->name_;
       }
-      return QString::fromStdString( class_loader_->getName( class_id.toStdString() ));
+//       return QString::fromStdString( class_loader_->getName( class_id.toStdString() ));
     }
 
   virtual QString getClassPackage( const QString& class_id ) const
@@ -110,7 +114,7 @@ public:
       {
         return iter->package_;
       }
-      return QString::fromStdString( class_loader_->getClassPackage( class_id.toStdString() ));
+//       return QString::fromStdString( class_loader_->getClassPackage( class_id.toStdString() ));
     }
 
   virtual QString getPluginManifestPath( const QString& class_id ) const
@@ -120,7 +124,7 @@ public:
       {
         return "";
       }
-      return QString::fromStdString( class_loader_->getPluginManifestPath( class_id.toStdString() ));
+//       return QString::fromStdString( class_loader_->getPluginManifestPath( class_id.toStdString() ));
     }
 
   virtual QIcon getIcon( const QString& class_id ) const
@@ -177,7 +181,7 @@ protected:
       }
       try
       {
-        return class_loader_->createUnmanagedInstance( class_id.toStdString() );
+//         return class_loader_->createUnmanagedInstance( class_id.toStdString() );
       }
       catch( pluginlib::PluginlibException& ex )
       {
@@ -192,7 +196,7 @@ protected:
     }
 
 private:
-  pluginlib::ClassLoader<Type>* class_loader_;
+  //pluginlib::ClassLoader<Type>* class_loader_;
   QHash<QString, BuiltInClassRecord> built_ins_;
 };
 

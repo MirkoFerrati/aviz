@@ -76,6 +76,8 @@ qt4_wrap_cpp(MOC_FILES
   widget_geometry_change_detector.h
   selection_panel.h
   tool_properties_panel.h
+    default_plugin/view_controllers/orbit_view_controller.h
+
 )
 
 add_library( ${PROJECT_NAME}
@@ -177,6 +179,7 @@ add_library( ${PROJECT_NAME}
   tool_properties_panel.cpp
   yaml_config_reader.cpp
   yaml_config_writer.cpp
+  default_plugin/view_controllers/orbit_view_controller.cpp
   ../ros/time.cpp
   ${ENV_CONFIG_FILE}
   ${MOC_FILES}

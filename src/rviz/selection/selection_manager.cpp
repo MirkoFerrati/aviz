@@ -50,8 +50,8 @@
 #include <sensor_msgs/Image.h>
 
 #include <ros/assert.h>
-#include <ros/node_handle.h>
-#include <ros/publisher.h>
+//#include <ros/node_handle.h>
+//#include <ros/publisher.h>
 
 #include "rviz/ogre_helpers/arrow.h"
 #include "rviz/ogre_helpers/axes.h"
@@ -157,16 +157,16 @@ void SelectionManager::initialize()
   camera_= scene_manager->createCamera( ss.str()+"_camera" );
 
   // create fallback picking material
-  fallback_pick_material_ = Ogre::MaterialManager::getSingleton().getByName( "rviz/DefaultPickAndDepth" );
-  fallback_pick_material_->load();
-
-  fallback_pick_cull_technique_ = fallback_pick_material_->getTechnique( "PickCull" );
-  fallback_black_cull_technique_ = fallback_pick_material_->getTechnique( "BlackCull" );
-  fallback_depth_cull_technique_ = fallback_pick_material_->getTechnique( "DepthCull" );
-
-  fallback_pick_technique_ = fallback_pick_material_->getTechnique( "Pick" );
-  fallback_black_technique_ = fallback_pick_material_->getTechnique( "Black" );
-  fallback_depth_technique_ = fallback_pick_material_->getTechnique( "Depth" );
+//   fallback_pick_material_ = Ogre::MaterialManager::getSingleton().getByName( "rviz/DefaultPickAndDepth" );
+//   fallback_pick_material_->load();
+// 
+//   fallback_pick_cull_technique_ = fallback_pick_material_->getTechnique( "PickCull" );
+//   fallback_black_cull_technique_ = fallback_pick_material_->getTechnique( "BlackCull" );
+//   fallback_depth_cull_technique_ = fallback_pick_material_->getTechnique( "DepthCull" );
+// 
+//   fallback_pick_technique_ = fallback_pick_material_->getTechnique( "Pick" );
+//   fallback_black_technique_ = fallback_pick_material_->getTechnique( "Black" );
+//   fallback_depth_technique_ = fallback_pick_material_->getTechnique( "Depth" );
 }
 
 
@@ -752,17 +752,17 @@ bool SelectionManager::render(Ogre::Viewport* viewport, Ogre::TexturePtr tex,
 
 void SelectionManager::publishDebugImage( const Ogre::PixelBox& pixel_box, const std::string& label )
 {
-  ros::Publisher pub;
-  ros::NodeHandle nh;
-  PublisherMap::const_iterator iter = debug_publishers_.find( label );
-  if( iter == debug_publishers_.end() )
+ // ros::Publisher pub;
+ // ros::NodeHandle nh;
+//  PublisherMap::const_iterator iter = debug_publishers_.find( label );
+ // if( iter == debug_publishers_.end() )
   {
-    pub = nh.advertise<sensor_msgs::Image>( "/rviz_debug/" + label, 2 );
-    debug_publishers_[ label ] = pub;
+    //pub = nh.advertise<sensor_msgs::Image>( "/rviz_debug/" + label, 2 );
+  //  debug_publishers_[ label ] = pub;
   }
-  else
+//  else
   {
-    pub = iter->second;
+  //  pub = iter->second;
   }
 
   sensor_msgs::Image msg;
@@ -804,7 +804,7 @@ void SelectionManager::publishDebugImage( const Ogre::PixelBox& pixel_box, const
     msg.data[ dest_index++ ] = b;
   }
 
-  pub.publish( msg );
+//  pub.publish( msg );
 }
 
 void SelectionManager::renderQueueStarted( uint8_t queueGroupId,

@@ -319,7 +319,7 @@ void MapDisplay::subscribe()
   {
     try
     {
-      map_sub_ = update_nh_.subscribe( topic_property_->getTopicStd(), 1, &MapDisplay::incomingMap, this );
+//       map_sub_ = update_nh_.subscribe( topic_property_->getTopicStd(), 1, &MapDisplay::incomingMap, this );
       setStatus( StatusProperty::Ok, "Topic", "OK" );
     }
     catch( ros::Exception& e )
@@ -329,7 +329,7 @@ void MapDisplay::subscribe()
 
     try
     {
-      update_sub_ = update_nh_.subscribe( topic_property_->getTopicStd() + "_updates", 1, &MapDisplay::incomingUpdate, this );
+//       update_sub_ = update_nh_.subscribe( topic_property_->getTopicStd() + "_updates", 1, &MapDisplay::incomingUpdate, this );
       setStatus( StatusProperty::Ok, "Update Topic", "OK" );
     }
     catch( ros::Exception& e )

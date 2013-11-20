@@ -97,16 +97,16 @@ void FramePositionTrackingViewController::updateTargetSceneNode()
   Ogre::Vector3 new_reference_position;
   Ogre::Quaternion new_reference_orientation;
 
-  if( context_->getFrameManager()->getTransform( target_frame_property_->getFrameStd(), ros::Time(),
-                                                 new_reference_position, new_reference_orientation ))
-  {
-    target_scene_node_->setPosition( new_reference_position );
-
-    reference_position_ = new_reference_position;
-    reference_orientation_ = new_reference_orientation;
-
-    context_->queueRender();
-  }
+//   if( context_->getFrameManager()->getTransform( target_frame_property_->getFrameStd(), ros::Time(),
+//                                                  new_reference_position, new_reference_orientation ))
+//   {
+//     target_scene_node_->setPosition( new_reference_position );
+// 
+//     reference_position_ = new_reference_position;
+//     reference_orientation_ = new_reference_orientation;
+// 
+//     context_->queueRender();
+//   }
 
 // Need to incorporate this functionality somehow....  Maybe right into TfFrameProperty itself.
 /////  if( frame_manager_->transformHasProblems( getTargetFrame().toStdString(), ros::Time(), error ))

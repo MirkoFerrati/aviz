@@ -70,11 +70,11 @@ void ToolManager::initialize()
   // Possibly this should be done with a loop over
   // factory_->getDeclaredClassIds(), but then I couldn't control the
   // order.
-  addTool( "rviz/MoveCamera" );
-  addTool( "rviz/Interact" );
-  addTool( "rviz/Select" );
-  addTool( "rviz/SetInitialPose" );
-  addTool( "rviz/SetGoal" );
+//   addTool( "rviz/MoveCamera" );
+//   addTool( "rviz/Interact" );
+//   addTool( "rviz/Select" );
+//   addTool( "rviz/SetInitialPose" );
+//   addTool( "rviz/SetGoal" );
 }
 
 void ToolManager::removeAll()

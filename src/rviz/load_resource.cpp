@@ -30,7 +30,10 @@
 #include "load_resource.h"
 
 #include <boost/filesystem.hpp>
+#include <ros/ros.h>
+
 #include <ros/package.h>
+
 #include <ros/ros.h>
 
 #include <QPixmapCache>
@@ -42,12 +45,12 @@ namespace rviz
 boost::filesystem::path getPath( QString url )
 {
   boost::filesystem::path path;
-
+  //package://rviz/icons/cursor.svg"
   if ( url.indexOf("package://", 0, Qt::CaseInsensitive) == 0 )
   {
     QString package_name = url.section('/',2,2);
     QString file_name = url.section('/',3);
-    path = ros::package::getPath(package_name.toStdString());
+    path = "/home/mirko/projects/walkman/rivz";//ros::package::getPath(package_name.toStdString());
     path = path / file_name.toStdString();
   }
   else if ( url.indexOf("file://", 0, Qt::CaseInsensitive) == 0 )

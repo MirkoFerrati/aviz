@@ -86,7 +86,7 @@ void TfFrameProperty::setFrameManager( FrameManager* frame_manager )
 void TfFrameProperty::fillFrameList()
 {
   std::vector<std::string> std_frames;
-  frame_manager_->getTFClient()->getFrameStrings( std_frames );
+//   frame_manager_->getTFClient()->getFrameStrings( std_frames );
   std::sort( std_frames.begin(), std_frames.end() );
 
   clearOptions();

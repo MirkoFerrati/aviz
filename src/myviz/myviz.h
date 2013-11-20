@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011, Willow Garage, Inc.
+ * Copyright (c) 2012, Willow Garage, Inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,49 +26,35 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef RVIZ_VISUALIZER_APP_H
-#define RVIZ_VISUALIZER_APP_H
+#ifndef MYVIZ_H
+#define MYVIZ_H
 
-#include <QObject>
-
-#ifndef Q_MOC_RUN  // See: https://bugreports.qt-project.org/browse/QTBUG-22829
-# include <ros/ros.h>
-#endif
-
-# include <ros/ros.h>
-
-
-class QTimer;
+#include <QWidget>
 
 namespace rviz
 {
+class Display;
+class RenderPanel;
+class VisualizationManager;
+}
 
-class VisualizationFrame;
-
-class VisualizerApp: public QObject
+// BEGIN_TUTORIAL
+// Class "MyViz" implements the top level widget for this example.
+class MyViz: public QWidget
 {
 Q_OBJECT
 public:
-  VisualizerApp();
-  virtual ~VisualizerApp();
-
-  /** Start everything.  Pass in command line arguments.
-   * @return false on failure, true on success. */
-  bool init( int argc, char** argv );
+  MyViz( QWidget* parent = 0 );
+  virtual ~MyViz();
 
 private Q_SLOTS:
-  /** If ros::ok() is false, close all windows. */
-  void checkContinue();
+  void setThickness( int thickness_percent );
+  void setCellSize( int cell_size_percent );
 
 private:
-  void startContinueChecker();
-
-  QTimer* continue_timer_;
-  VisualizationFrame* frame_;
-//  ros::NodeHandlePtr nh_;
- // ros::ServiceServer reload_shaders_service_;
+  rviz::VisualizationManager* manager_;
+  rviz::RenderPanel* render_panel_;
+  rviz::Display* grid_;
 };
-
-} // end namespace rviz
-
-#endif // RVIZ_VISUALIZER_APP_H
+// END_TUTORIAL
+#endif // MYVIZ_H

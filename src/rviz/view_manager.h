@@ -94,7 +94,7 @@ public:
    * a Config and instantiating and loading a new one from that. */
   ViewController* copy( ViewController* source );
 
-  PluginlibFactory<ViewController>* getFactory() const { return factory_; }
+//  PluginlibFactory<ViewController>* getFactory() const { return factory_; }
 
   /** @brief Set the 3D view widget whose view will be controlled by
    * ViewController instances from by this ViewManager. */

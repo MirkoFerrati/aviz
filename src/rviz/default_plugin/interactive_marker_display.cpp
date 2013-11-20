@@ -91,8 +91,8 @@ InteractiveMarkerDisplay::InteractiveMarkerDisplay()
 
 void InteractiveMarkerDisplay::onInitialize()
 {
-  tf::Transformer* tf = context_->getFrameManager()->getTFClient();
-  im_client_.reset( new interactive_markers::InteractiveMarkerClient( *tf, fixed_frame_.toStdString() ) );
+//   tf::Transformer* tf = context_->getFrameManager()->getTFClient();
+//   im_client_.reset( new interactive_markers::InteractiveMarkerClient( *tf, fixed_frame_.toStdString() ) );
 
   im_client_->setInitCb( boost::bind( &InteractiveMarkerDisplay::initCb, this, _1 ) );
   im_client_->setUpdateCb( boost::bind( &InteractiveMarkerDisplay::updateCb, this, _1 ) );
@@ -145,7 +145,7 @@ void InteractiveMarkerDisplay::subscribe()
     im_client_->subscribe(topic_ns_);
 
     std::string feedback_topic = topic_ns_+"/feedback";
-    feedback_pub_ = update_nh_.advertise<visualization_msgs::InteractiveMarkerFeedback>( feedback_topic, 100, false );
+//     feedback_pub_ = update_nh_.advertise<visualization_msgs::InteractiveMarkerFeedback>( feedback_topic, 100, false );
   }
 }
 

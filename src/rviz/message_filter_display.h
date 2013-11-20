@@ -93,12 +93,12 @@ public:
 
   virtual void onInitialize()
     {
-      tf_filter_ = new tf::MessageFilter<MessageType>( *context_->getTFClient(),
-                                                       fixed_frame_.toStdString(), 10, update_nh_ );
+//       tf_filter_ = new tf::MessageFilter<MessageType>( *context_->getTFClient(),
+//                                                        fixed_frame_.toStdString(), 10, update_nh_ );
 
-      tf_filter_->connectInput( sub_ );
-      tf_filter_->registerCallback( boost::bind( &MessageFilterDisplay<MessageType>::incomingMessage, this, _1 ));
-      context_->getFrameManager()->registerFilterForTransformStatusCheck( tf_filter_, this );
+//       tf_filter_->connectInput( sub_ );
+//       tf_filter_->registerCallback( boost::bind( &MessageFilterDisplay<MessageType>::incomingMessage, this, _1 ));
+//       context_->getFrameManager()->registerFilterForTransformStatusCheck( tf_filter_, this );
     }
 
   virtual ~MessageFilterDisplay()
@@ -137,7 +137,9 @@ protected:
 
       try
       {
-        sub_.subscribe( update_nh_, topic_property_->getTopicStd(), 10 );
+//         sub_.subscribe( update_nh_, topic_property_->getTopicStd(), 10 );
+        ros::Exception temp("mirko");
+        throw temp;
         setStatus( StatusProperty::Ok, "Topic", "OK" );
       }
       catch( ros::Exception& e )

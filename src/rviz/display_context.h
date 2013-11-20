@@ -90,7 +90,7 @@ public:
   virtual FrameManager* getFrameManager() const = 0;
 
   /** @brief Convenience function: returns getFrameManager()->getTFClient(). */
-  virtual tf::TransformListener* getTFClient() const = 0;
+//   virtual tf::TransformListener* getTFClient() const = 0;
 
   /** @brief Return the fixed frame name. */
   virtual QString getFixedFrame() const = 0;

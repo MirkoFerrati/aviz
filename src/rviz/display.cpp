@@ -87,8 +87,8 @@ void Display::initialize( DisplayContext* context )
   scene_manager_ = context_->getSceneManager();
   scene_node_ = scene_manager_->getRootSceneNode()->createChildSceneNode();
   
-  update_nh_.setCallbackQueue( context_->getUpdateQueue() );
-  threaded_nh_.setCallbackQueue( context_->getThreadedQueue() );
+//   update_nh_.setCallbackQueue( context_->getUpdateQueue() );
+//   threaded_nh_.setCallbackQueue( context_->getThreadedQueue() );
   fixed_frame_ = context_->getFixedFrame();
 
   onInitialize();

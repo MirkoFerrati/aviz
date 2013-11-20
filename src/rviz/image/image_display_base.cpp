@@ -76,7 +76,7 @@ ImageDisplayBase::~ImageDisplayBase()
 
 void ImageDisplayBase::onInitialize()
 {
-  it_.reset( new image_transport::ImageTransport( update_nh_ ));
+//   it_.reset( new image_transport::ImageTransport( update_nh_ ));
   scanForTransportSubscriberPlugins();
 }
 
@@ -161,8 +161,8 @@ void ImageDisplayBase::subscribe()
       }
       else
       {
-        tf_filter_.reset( new tf::MessageFilter<sensor_msgs::Image>(*sub_, (tf::Transformer&)*(context_->getTFClient()), targetFrame_, (uint32_t)queue_size_property_->getInt(), update_nh_));
-        tf_filter_->registerCallback(boost::bind(&ImageDisplayBase::incomingMessage, this, _1));
+//         tf_filter_.reset( new tf::MessageFilter<sensor_msgs::Image>(*sub_, (tf::Transformer&)*(context_->getTFClient()), targetFrame_, (uint32_t)queue_size_property_->getInt(), update_nh_));
+//         tf_filter_->registerCallback(boost::bind(&ImageDisplayBase::incomingMessage, this, _1));
       }
     }
     setStatus(StatusProperty::Ok, "Topic", "OK");

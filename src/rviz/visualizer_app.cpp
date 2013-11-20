@@ -119,7 +119,7 @@ bool VisualizerApp::init( int argc, char** argv )
   try
   {
 #endif
-    ros::init( argc, argv, "rviz", ros::init_options::AnonymousName );
+   // ros::init( argc, argv, "rviz", ros::init_options::AnonymousName );
 
     startContinueChecker();
 
@@ -205,7 +205,7 @@ bool VisualizerApp::init( int argc, char** argv )
       return false;
     }
 
-    if( !ros::master::check() )
+    /*if( !ros::master::check() )
     {
       WaitForMasterDialog* dialog = new WaitForMasterDialog;
       if( dialog->exec() != QDialog::Accepted )
@@ -215,7 +215,7 @@ bool VisualizerApp::init( int argc, char** argv )
     }
 
     nh_.reset( new ros::NodeHandle );
-
+*/
     if( enable_ogre_log )
     {
       OgreLogging::useRosLog();
@@ -246,8 +246,8 @@ bool VisualizerApp::init( int argc, char** argv )
 
     frame_->show();
 
-    ros::NodeHandle private_nh("~");
-    reload_shaders_service_ = private_nh.advertiseService("reload_shaders", reloadShaders);
+  //  ros::NodeHandle private_nh("~");
+  //  reload_shaders_service_ = private_nh.advertiseService("reload_shaders", reloadShaders);
 
 #if CATCH_EXCEPTIONS
   }
@@ -275,7 +275,7 @@ void VisualizerApp::startContinueChecker()
 
 void VisualizerApp::checkContinue()
 {
-  if( !ros::ok() )
+  /*if( !ros::ok() )
   {
     if( frame_ )
     {
@@ -283,7 +283,7 @@ void VisualizerApp::checkContinue()
       frame_->setWindowModified( false );
     }
     QApplication::closeAllWindows();
-  }
+  }*/
 }
 
 } // namespace rviz

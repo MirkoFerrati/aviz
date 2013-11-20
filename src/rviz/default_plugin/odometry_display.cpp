@@ -93,12 +93,12 @@ OdometryDisplay::~OdometryDisplay()
 
 void OdometryDisplay::onInitialize()
 {
-  tf_filter_ = new tf::MessageFilter<nav_msgs::Odometry>( *context_->getTFClient(), fixed_frame_.toStdString(),
-                                                          5, update_nh_ );
-
-  tf_filter_->connectInput( sub_ );
-  tf_filter_->registerCallback( boost::bind( &OdometryDisplay::incomingMessage, this, _1 ));
-  context_->getFrameManager()->registerFilterForTransformStatusCheck( tf_filter_, this );
+//  /* tf_filter_ = new tf::MessageFilter<nav_msgs::Odometry>( *context_->getTFClient(), fixed_frame_.toStdString(),
+//                                                           5, update_nh_ );
+// 
+//   tf_filter_->connectInput( sub_ );
+//   tf_filter_->registerCallback( boost::bind( &OdometryDisplay::incomingMessage, this, _1 ));
+//   context_->getFrameManager()->registerFilterForTransformStatusCheck( tf_filter_, this );*/
 }
 
 void OdometryDisplay::clear()
@@ -170,7 +170,7 @@ void OdometryDisplay::subscribe()
 
   try
   {
-    sub_.subscribe( update_nh_, topic_property_->getTopicStd(), 5 );
+//     sub_.subscribe( update_nh_, topic_property_->getTopicStd(), 5 );
     setStatus( StatusProperty::Ok, "Topic", "OK" );
   }
   catch( ros::Exception& e )

@@ -39,7 +39,6 @@
 #include <sstream>
 
 #include <ros/assert.h>
-
 #define MAX_ELEMENTS (65536/4)
 
 namespace rviz

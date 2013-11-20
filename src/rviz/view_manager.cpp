@@ -39,6 +39,7 @@
 #include "rviz/view_controller.h"
 
 #include "rviz/view_manager.h"
+#include "default_plugin/view_controllers/orbit_view_controller.h"
 
 namespace rviz
 {
@@ -47,7 +48,7 @@ ViewManager::ViewManager( DisplayContext* context )
   : context_( context )
   , root_property_( new ViewControllerContainer )
   , property_model_( new PropertyTreeModel( root_property_ ))
-  , factory_( new PluginlibFactory<ViewController>( "rviz", "rviz::ViewController" ))
+//  , factory_( new PluginlibFactory<ViewController>( "rviz", "rviz::ViewController" ))
   , current_( NULL )
   , render_panel_( NULL )
 {
@@ -58,12 +59,16 @@ ViewManager::ViewManager( DisplayContext* context )
 ViewManager::~ViewManager()
 {
   delete property_model_;
-  delete factory_;
+ // delete factory_;
 }
 
 void ViewManager::initialize()
 {
-  setCurrent( create( "rviz/Orbit" ), false );
+ //   setCurrent( create( "rviz/Orbit" ), false );
+    ViewController* temp=new OrbitViewController();
+    temp->initialize( context_ );
+    setCurrent(temp,false);
+    
 }
 
 void ViewManager::update( float wall_dt, float ros_dt )
@@ -159,7 +164,7 @@ void ViewManager::copyCurrentToList()
   if( current )
   {
     ViewController* new_copy = copy( current );
-    new_copy->setName( factory_->getClassName( new_copy->getClassId() ));
+    //new_copy->setName( factory_->getClassName( new_copy->getClassId() ));
     root_property_->addChild( new_copy );
   }
 }

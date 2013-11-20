@@ -580,21 +580,21 @@ void TFDisplay::updateFrame( FrameInfo* frame )
       }
     }
 
-    tf::StampedTransform transform;
-    try {
-      context_->getFrameManager()->getTFClientPtr()->lookupTransform(frame->parent_,frame->name_,ros::Time(0),transform);
-    }
-    catch(tf::TransformException& e)
-    {
-      ROS_DEBUG( "Error transforming frame '%s' (parent of '%s') to frame '%s'",
-                 frame->parent_.c_str(), frame->name_.c_str(), qPrintable( fixed_frame_ ));
-    }
+    //tf::StampedTransform transform;
+//     try {
+//       context_->getFrameManager()->getTFClientPtr()->lookupTransform(frame->parent_,frame->name_,ros::Time(0),transform);
+//     }
+//     catch(tf::TransformException& e)
+//     {
+//       ROS_DEBUG( "Error transforming frame '%s' (parent of '%s') to frame '%s'",
+//                  frame->parent_.c_str(), frame->name_.c_str(), qPrintable( fixed_frame_ ));
+//     }
 
     // get the position/orientation relative to the parent frame
-    Ogre::Vector3 relative_position( transform.getOrigin().x(), transform.getOrigin().y(), transform.getOrigin().z() );
-    Ogre::Quaternion relative_orientation( transform.getRotation().w(), transform.getRotation().x(), transform.getRotation().y(), transform.getRotation().z() );
-    frame->rel_position_property_->setVector( relative_position );
-    frame->rel_orientation_property_->setQuaternion( relative_orientation );
+//     Ogre::Vector3 relative_position( transform.getOrigin().x(), transform.getOrigin().y(), transform.getOrigin().z() );
+//     Ogre::Quaternion relative_orientation( transform.getRotation().w(), transform.getRotation().x(), transform.getRotation().y(), transform.getRotation().z() );
+//     frame->rel_position_property_->setVector( relative_position );
+//     frame->rel_orientation_property_->setQuaternion( relative_orientation );
 
     if( show_arrows_property_->getBool() )
     {

@@ -56,7 +56,7 @@ PointCloud2Display::PointCloud2Display()
 
   // PointCloudCommon sets up a callback queue with a thread for each
   // instance.  Use that for processing incoming messages.
-  update_nh_.setCallbackQueue( point_cloud_common_->getCallbackQueue() );
+//   update_nh_.setCallbackQueue( point_cloud_common_->getCallbackQueue() );
 }
 
 PointCloud2Display::~PointCloud2Display()

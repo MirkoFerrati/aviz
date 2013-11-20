@@ -133,7 +133,7 @@ VisualizationFrame::VisualizationFrame( QWidget* parent )
   post_load_timer_->setSingleShot( true );
   connect( post_load_timer_, SIGNAL( timeout() ), this, SLOT( markLoadingDone() ));
 
-  package_path_ = ros::package::getPath("rviz");
+  package_path_ ="/home/mirko/projects/walkman/rivz/rviz"; //ros::package::getPath("rviz");
   help_path_ = QString::fromStdString( (fs::path(package_path_) / "help/help.html").BOOST_FILE_STRING() );
   splash_path_ = QString::fromStdString( (fs::path(package_path_) / "images/splash.png").BOOST_FILE_STRING() );
 
@@ -251,11 +251,11 @@ void VisualizationFrame::initialize(const QString& display_config_file )
   }
   Q_EMIT statusUpdate( "Initializing" );
 
-  if( !ros::isInitialized() )
+  /*if( !ros::isInitialized() )
   {
     int argc = 0;
     ros::init( argc, 0, "rviz", ros::init_options::AnonymousName );
-  }
+  }*/
 
   QWidget* central_widget = new QWidget(this);
   QHBoxLayout* central_layout = new QHBoxLayout;

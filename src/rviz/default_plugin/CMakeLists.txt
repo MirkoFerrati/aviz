@@ -2,11 +2,11 @@ include_directories(.)
 
 qt4_wrap_cpp(MOC_FILES
   axes_display.h
-  camera_display.h
-  depth_cloud_display.h
-  effort_display.h
-  fluid_pressure_display.h
-  grid_cells_display.h
+#  camera_display.h
+#  depth_cloud_display.h
+#  effort_display.h
+#  fluid_pressure_display.h
+#  grid_cells_display.h
   grid_display.h
   illuminance_display.h
   image_display.h
@@ -31,7 +31,7 @@ qt4_wrap_cpp(MOC_FILES
   range_display.h
   robot_model_display.h
   temperature_display.h
-  tf_display.h
+#   tf_display.h
   tools/goal_tool.h
   tools/initial_pose_tool.h
   tools/interaction_tool.h
@@ -45,13 +45,13 @@ qt4_wrap_cpp(MOC_FILES
 
 set(SOURCE_FILES
   axes_display.cpp
-  camera_display.cpp
-  depth_cloud_display.cpp
+#  camera_display.cpp
+#  depth_cloud_display.cpp
   depth_cloud_mld.cpp
-  effort_display.cpp
+#  effort_display.cpp
   effort_visual.cpp
-  fluid_pressure_display.cpp
-  grid_cells_display.cpp
+#  fluid_pressure_display.cpp
+#  grid_cells_display.cpp
   grid_display.cpp
   illuminance_display.cpp
   image_display.cpp
@@ -87,7 +87,7 @@ set(SOURCE_FILES
   range_display.cpp
   robot_model_display.cpp
   temperature_display.cpp
-  tf_display.cpp
+#   tf_display.cpp
   tools/focus_tool.cpp
   tools/measure_tool.cpp
   tools/move_tool.cpp

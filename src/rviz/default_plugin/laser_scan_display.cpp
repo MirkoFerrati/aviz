@@ -58,7 +58,7 @@ LaserScanDisplay::LaserScanDisplay()
 
   // PointCloudCommon sets up a callback queue with a thread for each
   // instance.  Use that for processing incoming messages.
-  update_nh_.setCallbackQueue( point_cloud_common_->getCallbackQueue() );
+//   update_nh_.setCallbackQueue( point_cloud_common_->getCallbackQueue() );
 }
 
 LaserScanDisplay::~LaserScanDisplay()
@@ -91,18 +91,18 @@ void LaserScanDisplay::processMessage( const sensor_msgs::LaserScanConstPtr& sca
     filter_tolerance_ = tolerance;
     tf_filter_->setTolerance(filter_tolerance_);
   }
-
-  try
-  {
-    projector_->transformLaserScanToPointCloud( fixed_frame_.toStdString(), *scan, *cloud, *context_->getTFClient(),
-                                                laser_geometry::channel_option::Intensity );
-  }
-  catch (tf::TransformException& e)
-  {
-    ROS_DEBUG( "LaserScan [%s]: failed to transform scan: %s.  This message should not repeat (tolerance should now be set on our tf::MessageFilter).",
-               qPrintable( getName() ), e.what() );
-    return;
-  }
+return;
+//   try
+//   {
+//     projector_->transformLaserScanToPointCloud( fixed_frame_.toStdString(), *scan, *cloud, *context_->getTFClient(),
+//                                                 laser_geometry::channel_option::Intensity );
+//   }
+//   catch (tf::TransformException& e)
+//   {
+//     ROS_DEBUG( "LaserScan [%s]: failed to transform scan: %s.  This message should not repeat (tolerance should now be set on our tf::MessageFilter).",
+//                qPrintable( getName() ), e.what() );
+//     return;
+//   }
 
   point_cloud_common_->addMessage( cloud );
 }

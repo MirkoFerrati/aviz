@@ -2,7 +2,7 @@
 //#define ROS_H_MIRKO
 
 
-#define ROS_PACKAGE_NAME "mirko"
+#define ROS_PACKAGE_NAME "/home/mirko/projects/walkman/rivz/rviz/"
 
 //#include </opt/ros/hydro/include/ros/ros.h>
 
@@ -28,7 +28,7 @@
 #include "ros/topic.h"
 // #include "ros/names.h"
 
-#include <assert.h>
+
 
 #undef ROS_INFO
 #define ROS_INFO(...) printf(__VA_ARGS__)
@@ -40,12 +40,12 @@
 #undef ROS_WARN
 #define ROS_WARN(...) printf(__VA_ARGS__)
 
-#undef ROS_ASSERT
-#define ROS_ASSERT(...) assert(__VA_ARGS__)
 
 #undef ROS_ERROR_STREAM
 #define ROS_ERROR_STREAM(...) std::cout<<__VA_ARGS__<<std::endl
 
+#undef ROS_DEBUG_STREAM
+#define ROS_DEBUG_STREAM(...) std::cout<<__VA_ARGS__<<std::endl
 
 #undef ROS_DEBUG
 #define ROS_DEBUG(...) printf(__VA_ARGS__)
@@ -53,6 +53,10 @@
 
 #undef ROS_DEBUG_NAMED
 #define ROS_DEBUG_NAMED(x,...) printf(__VA_ARGS__)
+
+
+#undef ROS_LOG
+#define ROS_LOG(x,y,...) printf(__VA_ARGS__)
 
 
 #undef ROS_INFO_STREAM

@@ -29,7 +29,7 @@
 
 #include "shape.h"
 #include <ros/assert.h>
-
+#include <ros/ros.h>
 #include <OGRE/OgreSceneManager.h>
 #include <OGRE/OgreSceneNode.h>
 #include <OGRE/OgreVector3.h>
@@ -39,7 +39,6 @@
 #include <OGRE/OgreTextureManager.h>
 #include <stdint.h>
 
-#define ROS_PACKAGE_NAME "mirko"
 
 
 namespace rviz
@@ -70,7 +69,8 @@ Ogre::Entity* Shape::createEntity(const std::string& name, Type type, Ogre::Scen
     break;
 
   default:
-    ROS_BREAK();
+//    ROS_BREAK();
+      ;
   }
 
   return scene_manager->createEntity(name, mesh_name);

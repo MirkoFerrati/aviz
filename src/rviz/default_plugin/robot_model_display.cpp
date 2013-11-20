@@ -142,22 +142,22 @@ void RobotModelDisplay::updateTfPrefix()
 void RobotModelDisplay::load()
 {
   std::string content;
-  if( !update_nh_.getParam( robot_description_property_->getStdString(), content ))
-  {
-    std::string loc;
-    if( update_nh_.searchParam( robot_description_property_->getStdString(), loc ))
-    {
-      update_nh_.getParam( loc, content );
-    }
-    else
-    {
-      clear();
-      setStatus( StatusProperty::Error, "URDF",
-                 "Parameter [" + robot_description_property_->getString()
-                 + "] does not exist, and was not found by searchParam()" );
-      return;
-    }
-  }
+//   if( !update_nh_.getParam( robot_description_property_->getStdString(), content ))
+//   {
+//     std::string loc;
+//     if( update_nh_.searchParam( robot_description_property_->getStdString(), loc ))
+//     {
+//       update_nh_.getParam( loc, content );
+//     }
+//     else
+//     {
+//       clear();
+//       setStatus( StatusProperty::Error, "URDF",
+//                  "Parameter [" + robot_description_property_->getString()
+//                  + "] does not exist, and was not found by searchParam()" );
+//       return;
+//     }
+//   }
 
   if( content.empty() )
   {

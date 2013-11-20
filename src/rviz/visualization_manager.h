@@ -55,10 +55,10 @@ namespace ros
 class CallbackQueueInterface;
 }
 
-namespace tf
-{
-class TransformListener;
-}
+// namespace tf
+// {
+// class TransformListener;
+// }
 
 namespace rviz
 {
@@ -143,6 +143,8 @@ public:
    */
   Display* createDisplay( const QString& class_lookup_name, const QString& name, bool enabled );
 
+  Display* createDisplay( Display *created_display,const QString& name,bool enabled );
+  
   /**
    * \brief Add a display to be managed by this panel
    * @param display The display to be added
@@ -185,7 +187,7 @@ public:
   /**
    * @brief Convenience function: returns getFrameManager()->getTFClient().
    */
-  tf::TransformListener* getTFClient() const;
+//   tf::TransformListener* getTFClient() const;
 
   /**
    * @brief Returns the Ogre::SceneManager used for the main RenderPanel.

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011, Willow Garage, Inc.
+ * Copyright (c) 2012, Willow Garage, Inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,49 +26,30 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef RVIZ_VISUALIZER_APP_H
-#define RVIZ_VISUALIZER_APP_H
 
-#include <QObject>
+// BEGIN_TUTORIAL
 
-#ifndef Q_MOC_RUN  // See: https://bugreports.qt-project.org/browse/QTBUG-22829
-# include <ros/ros.h>
-#endif
+// The main() for this "myviz" example is very simple, it just
+// initializes ROS, creates a QApplication, creates the top-level
+// widget (of type "MyViz"), shows it, and runs the Qt event loop.
 
-# include <ros/ros.h>
+#include <QApplication>
+#include <ros/ros.h>
+#include "myviz.h"
 
-
-class QTimer;
-
-namespace rviz
+int main(int argc, char **argv)
 {
+//   if( !ros::isInitialized() )
+//   {
+//     ros::init( argc, argv, "myviz", ros::init_options::AnonymousName );
+//   }
 
-class VisualizationFrame;
+  QApplication app( argc, argv );
 
-class VisualizerApp: public QObject
-{
-Q_OBJECT
-public:
-  VisualizerApp();
-  virtual ~VisualizerApp();
+  MyViz* myviz = new MyViz();
+  myviz->show();
 
-  /** Start everything.  Pass in command line arguments.
-   * @return false on failure, true on success. */
-  bool init( int argc, char** argv );
+  app.exec();
 
-private Q_SLOTS:
-  /** If ros::ok() is false, close all windows. */
-  void checkContinue();
-
-private:
-  void startContinueChecker();
-
-  QTimer* continue_timer_;
-  VisualizationFrame* frame_;
-//  ros::NodeHandlePtr nh_;
- // ros::ServiceServer reload_shaders_service_;
-};
-
-} // end namespace rviz
-
-#endif // RVIZ_VISUALIZER_APP_H
+  delete myviz;
+}

@@ -106,10 +106,10 @@ private:
 class VisualizationManagerPrivate
 {
 public:
-  ros::CallbackQueue threaded_queue_;
+//   ros::CallbackQueue threaded_queue_;
   boost::thread_group threaded_queue_threads_;
-  ros::NodeHandle update_nh_;
-  ros::NodeHandle threaded_nh_;
+//   ros::NodeHandle update_nh_;
+//   ros::NodeHandle threaded_nh_;
   boost::mutex render_mutex_;
 };
 
@@ -130,7 +130,7 @@ VisualizationManager::VisualizationManager( RenderPanel* render_panel, WindowMan
 
   render_panel->setAutoRender(false);
 
-  private_->threaded_nh_.setCallbackQueue(&private_->threaded_queue_);
+  //private_->threaded_nh_.setCallbackQueue(&private_->threaded_queue_);
 
   scene_manager_ = ogre_root_->createSceneManager( Ogre::ST_GENERIC );
 
@@ -235,7 +235,7 @@ void VisualizationManager::initialize()
 
 ros::CallbackQueueInterface* VisualizationManager::getThreadedQueue()
 {
-  return &private_->threaded_queue_;
+//   return &private_->threaded_queue_;
 }
 
 void VisualizationManager::lockRender()
@@ -250,7 +250,7 @@ void VisualizationManager::unlockRender()
 
 ros::CallbackQueueInterface* VisualizationManager::getUpdateQueue()
 {
-  return ros::getGlobalCallbackQueue();
+  //return ros::getGlobalCallbackQueue();
 }
 
 void VisualizationManager::startUpdate()
@@ -308,7 +308,7 @@ void VisualizationManager::onUpdate()
     resetTime();
   }
 
-  ros::spinOnce();
+  //ros::spinOnce();
 
   Q_EMIT preUpdate();
 
@@ -381,7 +381,7 @@ void VisualizationManager::updateFrames()
 {
   typedef std::vector<std::string> V_string;
   V_string frames;
-  frame_manager_->getTFClient()->getFrameStrings( frames );
+  //frame_manager_->getTFClient()->getFrameStrings( frames );
 
   // Check the fixed frame to see if it's ok
   std::string error;
@@ -407,15 +407,15 @@ void VisualizationManager::updateFrames()
   }
 }
 
-tf::TransformListener* VisualizationManager::getTFClient() const
-{
-  return frame_manager_->getTFClient();
-}
+// tf::TransformListener* VisualizationManager::getTFClient() const
+// {
+//   return frame_manager_->getTFClient();
+// }
 
 void VisualizationManager::resetTime()
 {
   root_display_group_->reset();
-  frame_manager_->getTFClient()->clear();
+//  frame_manager_->getTFClient()->clear();
 
   ros_time_begin_ = ros::Time();
   wall_clock_begin_ = ros::WallTime();
@@ -474,6 +474,20 @@ Display* VisualizationManager::createDisplay( const QString& class_lookup_name,
   QApplication::restoreOverrideCursor();
   return new_display;
 }
+
+Display* VisualizationManager::createDisplay( Display *created_display,
+                                              const QString& name,
+                                              bool enabled )
+{
+    QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+    //Display* new_display = root_display_group_->createDisplay( class_lookup_name );
+    addDisplay( created_display, enabled );
+    created_display->setName( name );
+    QApplication::restoreOverrideCursor();
+    return created_display;
+}
+
+
 
 double VisualizationManager::getWallClock()
 {
@@ -547,7 +561,7 @@ void VisualizationManager::threadedQueueThreadFunc()
 {
   while (!shutting_down_)
   {
-    private_->threaded_queue_.callOne(ros::WallDuration(0.1));
+    //private_->threaded_queue_.callOne(ros::WallDuration(0.1));
   }
 }
 

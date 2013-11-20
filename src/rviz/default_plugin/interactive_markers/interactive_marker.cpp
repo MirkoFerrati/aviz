@@ -299,6 +299,8 @@ QString InteractiveMarker::makeMenuString( const std::string &entry )
 
 void InteractiveMarker::updateReferencePose()
 {
+    return;
+    /*
   boost::recursive_mutex::scoped_lock lock(mutex_);
   Ogre::Vector3 reference_position;
   Ogre::Quaternion reference_orientation;
@@ -346,7 +348,7 @@ void InteractiveMarker::updateReferencePose()
   reference_node_->setOrientation( reference_orientation );
   reference_node_->setVisible( true, false );
 
-  context_->queueRender();
+  context_->queueRender();*/
 }
 
 

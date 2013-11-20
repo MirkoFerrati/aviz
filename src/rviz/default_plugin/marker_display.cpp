@@ -78,14 +78,14 @@ MarkerDisplay::MarkerDisplay()
 
 void MarkerDisplay::onInitialize()
 {
-  tf_filter_ = new tf::MessageFilter<visualization_msgs::Marker>( *context_->getTFClient(),
-                                                                  fixed_frame_.toStdString(),
-                                                                  queue_size_property_->getInt(),
-                                                                  update_nh_ );
-
-  tf_filter_->connectInput(sub_);
-  tf_filter_->registerCallback(boost::bind(&MarkerDisplay::incomingMarker, this, _1));
-  tf_filter_->registerFailureCallback(boost::bind(&MarkerDisplay::failedMarker, this, _1, _2));
+//   tf_filter_ = new tf::MessageFilter<visualization_msgs::Marker>( *context_->getTFClient(),
+//                                                                   fixed_frame_.toStdString(),
+//                                                                   queue_size_property_->getInt(),
+//                                                                   update_nh_ );
+// 
+//   tf_filter_->connectInput(sub_);
+//   tf_filter_->registerCallback(boost::bind(&MarkerDisplay::incomingMarker, this, _1));
+//   tf_filter_->registerFailureCallback(boost::bind(&MarkerDisplay::failedMarker, this, _1, _2));
 }
 
 MarkerDisplay::~MarkerDisplay()
@@ -149,8 +149,8 @@ void MarkerDisplay::subscribe()
 
     try
     {
-      sub_.subscribe( update_nh_, marker_topic, 1000 );
-      array_sub_ = update_nh_.subscribe( marker_topic + "_array", 1000, &MarkerDisplay::incomingMarkerArray, this );
+//       sub_.subscribe( update_nh_, marker_topic, 1000 );
+//       array_sub_ = update_nh_.subscribe( marker_topic + "_array", 1000, &MarkerDisplay::incomingMarkerArray, this );
       setStatus( StatusProperty::Ok, "Topic", "OK" );
     }
     catch( ros::Exception& e )

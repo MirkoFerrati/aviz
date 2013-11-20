@@ -28,6 +28,7 @@
  */
 
 #include "mesh_loader.h"
+#include <ros/ros.h>
 #include <resource_retriever/retriever.h>
 
 #include <boost/filesystem.hpp>
@@ -66,8 +67,6 @@
 #endif
 
 namespace fs = boost::filesystem;
-
-#define ROS_PACKAGE_NAME "mirko"
 
 namespace rviz
 {

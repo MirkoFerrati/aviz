@@ -178,10 +178,10 @@ public:
   const std::string& getFixedFrame() { return fixed_frame_; }
 
   /** @brief Return the tf::TransformListener used to receive transform data. */
-  tf::TransformListener* getTFClient() { return tf_.get(); }
+//   tf::TransformListener* getTFClient() { return tf_.get(); }
 
   /** @brief Return a boost shared pointer to the tf::TransformListener used to receive transform data. */
-  const boost::shared_ptr<tf::TransformListener>& getTFClientPtr() { return tf_; }
+//   const boost::shared_ptr<tf::TransformListener>& getTFClientPtr() { return tf_; }
 
   /** @brief Create a description of a transform problem.
    * @param frame_id The name of the frame with issues.
@@ -256,7 +256,7 @@ private:
   boost::mutex cache_mutex_;
   M_Cache cache_;
 
-  boost::shared_ptr<tf::TransformListener> tf_;
+//   boost::shared_ptr<tf::TransformListener> tf_;
   std::string fixed_frame_;
 
   bool pause_;

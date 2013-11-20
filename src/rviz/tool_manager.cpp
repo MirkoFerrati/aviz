@@ -37,6 +37,7 @@
 #include "rviz/properties/property_tree_model.h"
 
 #include "rviz/tool_manager.h"
+#include "default_plugin/tools/move_tool.h"
 
 namespace rviz
 {
@@ -70,7 +71,8 @@ void ToolManager::initialize()
   // Possibly this should be done with a loop over
   // factory_->getDeclaredClassIds(), but then I couldn't control the
   // order.
-//   addTool( "rviz/MoveCamera" );
+    Tool* temp=new rviz::MoveTool();
+   addTool(temp, "MoveCamera" );
 //   addTool( "rviz/Interact" );
 //   addTool( "rviz/Select" );
 //   addTool( "rviz/SetInitialPose" );
@@ -168,6 +170,42 @@ void ToolManager::updatePropertyVisibility( Property* container )
     property_tree_model_->getRoot()->takeChild( container );
   }
 }
+
+Tool* ToolManager::addTool( Tool* created_tool,const QString& class_id )
+{
+    QString error;
+    bool failed = false;
+    Tool* tool = created_tool;//factory_->make( class_id, &error );
+    if( !tool )
+    {
+        tool = new FailedTool( class_id, error );
+        failed = true;
+    }
+    
+    tools_.append( tool );
+    tool->setName( addSpaceToCamelCase(class_id ));//factory_->getClassName( class_id )));
+    tool->setIcon( factory_->getIcon( class_id ) );
+    tool->initialize( context_ );
+    Property* container = tool->getPropertyContainer();
+    connect( container, SIGNAL( childListChanged( Property* )), this, SLOT( updatePropertyVisibility( Property* )));
+    updatePropertyVisibility( container );
+    
+    Q_EMIT toolAdded( tool );
+    
+    // If the default tool is unset and this tool loaded correctly, set
+    // it as the default and current.
+    if( default_tool_ == NULL && !failed )
+    {
+        setDefaultTool( tool );
+        setCurrentTool( tool );
+    }
+    
+    Q_EMIT configChanged();
+    
+    return tool;
+}
+
+
 
 Tool* ToolManager::addTool( const QString& class_id )
 {

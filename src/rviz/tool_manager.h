@@ -62,6 +62,9 @@ public:
   /** @brief Create a tool by class lookup name, add it to the list, and return it. */
   Tool* addTool( const QString& tool_class_lookup_name );
 
+  
+  Tool* addTool( Tool* created_tool,const QString& class_id );
+  
   /**
    * \brief Return the tool currently in use.
    * \sa setCurrentTool()

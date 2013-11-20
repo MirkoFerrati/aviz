@@ -180,6 +180,8 @@ add_library( ${PROJECT_NAME}
   yaml_config_reader.cpp
   yaml_config_writer.cpp
   default_plugin/view_controllers/orbit_view_controller.cpp
+      default_plugin/tools/move_tool.cpp
+
   ../ros/time.cpp
   ${ENV_CONFIG_FILE}
   ${MOC_FILES}

@@ -38,7 +38,7 @@
 #include <OGRE/OgreSubEntity.h>
 #include <OGRE/OgreTextureManager.h>
 
-#include <ros/console.h>
+#include "ros/console.h"
 
 #include <resource_retriever/retriever.h>
 
@@ -62,7 +62,7 @@
 #include "rviz/robot/robot_link.h"
 #include "rviz/robot/robot_joint.h"
 
-#define ROS_PACKAGE_NAME "mirko"
+#define ROS_PACKAGE_NAME "/home/mirko/projects/walkman/rivz/rviz/"
 
 
 namespace fs=boost::filesystem;

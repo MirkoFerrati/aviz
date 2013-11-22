@@ -257,6 +257,7 @@ private:
   M_Cache cache_;
 
 //   boost::shared_ptr<tf::TransformListener> tf_;
+  boost::shared_ptr<tf::Transformer> tf_;
   std::string fixed_frame_;
 
   bool pause_;

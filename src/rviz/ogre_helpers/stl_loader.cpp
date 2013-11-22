@@ -29,7 +29,7 @@
 
 #include "stl_loader.h"
 #include <ros/console.h>
-
+#include <ros/ros.h>
 #include <OGRE/OgreManualObject.h>
 
 namespace ogre_tools

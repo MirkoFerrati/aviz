@@ -1,5 +1,5 @@
 include_directories(.)
-
+include_directories("/opt/ros/hydro/include")
 qt4_wrap_cpp(MOC_FILES
   axes_display.h
 #  camera_display.h
@@ -109,7 +109,7 @@ set(SOURCE_FILES
 )
 
 add_library(default_plugin ${SOURCE_FILES})
-target_link_libraries(default_plugin ${PROJECT_NAME} ${catkin_LIBRARIES} ${QT_LIBRARIES} ${OGRE_LIBRARIES} ${Boost_LIBRARIES} ${urdfdom_LIBRARIES})
+target_link_libraries(default_plugin ${PROJECT_NAME} ${catkin_LIBRARIES} ${QT_LIBRARIES} ${OGRE_LIBRARIES} ${Boost_LIBRARIES} ${urdfdom_LIBRARIES} resource_retriever)
 
 # install(TARGETS default_plugin
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}

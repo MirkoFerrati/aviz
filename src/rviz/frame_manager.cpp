@@ -31,7 +31,7 @@
 #include "display.h"
 #include "properties/property.h"
 
-#include <tf/transform_listener.h>
+//#include <tf/transform_listener.h>
 
 #include <std_msgs/Float32.h>
 #include <ros/ros.h>
@@ -41,7 +41,8 @@ namespace rviz
 
 FrameManager::FrameManager()
 {
-//   tf_.reset(new tf::TransformListener(ros::NodeHandle(), ros::Duration(10*60), false));
+//    tf_.reset(new tf::TransformListener(ros::NodeHandle(), ros::Duration(10*60), false));
+   tf_.reset(new tf::Transformer(false, ros::Duration(10*60)));
   setSyncMode( SyncOff );
   setPause(false);
 }
@@ -231,9 +232,9 @@ bool FrameManager::transform(const std::string& frame, ros::Time time, const geo
 
   position = Ogre::Vector3::ZERO;
   orientation = Ogre::Quaternion::IDENTITY;
-return true;
+// return true;
   // put all pose data into a tf stamped pose
- /* tf::Quaternion bt_orientation(pose_msg.orientation.x, pose_msg.orientation.y, pose_msg.orientation.z, pose_msg.orientation.w);
+  tf::Quaternion bt_orientation(pose_msg.orientation.x, pose_msg.orientation.y, pose_msg.orientation.z, pose_msg.orientation.w);
   tf::Vector3 bt_position(pose_msg.position.x, pose_msg.position.y, pose_msg.position.z);
 
   if (bt_orientation.x() == 0.0 && bt_orientation.y() == 0.0 && bt_orientation.z() == 0.0 && bt_orientation.w() == 0.0)
@@ -242,12 +243,15 @@ return true;
   }
 
   tf::Stamped<tf::Pose> pose_in(tf::Transform(bt_orientation,bt_position), time, frame);
-  tf::Stamped<tf::Pose> pose_out;
-
+  //tf::Stamped<tf::Pose> pose_out;
+    tf::Transform pose_out;
   // convert pose into new frame
   try
   {
-    tf_->transformPose( fixed_frame_, pose_in, pose_out );
+//    tf_->transformPose( fixed_frame_, pose_in, pose_out );
+      tf::StampedTransform transform;
+      tf_->lookupTransform(fixed_frame_,frame,time,transform);
+      pose_out=transform*tf::Transform(bt_orientation,bt_position);
   }
   catch(std::runtime_error& e)
   {
@@ -255,26 +259,28 @@ return true;
     return false;
   }
 
+  std::cout<<"SIAMO QUI A CAPIRE SE FUNZIONA"<<std::endl;
+  
   bt_position = pose_out.getOrigin();
   position = Ogre::Vector3(bt_position.x(), bt_position.y(), bt_position.z());
 
   bt_orientation = pose_out.getRotation();
   orientation = Ogre::Quaternion( bt_orientation.w(), bt_orientation.x(), bt_orientation.y(), bt_orientation.z() );
 
-  return true;*/
+  return true;
 }
 
 bool FrameManager::frameHasProblems(const std::string& frame, ros::Time time, std::string& error)
 {
-//   if (!tf_->frameExists(frame))
-//   {
-//     error = "Frame [" + frame + "] does not exist";
-//     if (frame == fixed_frame_)
-//     {
-//       error = "Fixed " + error;
-//     }
-//     return true;
-//   }
+  if (!tf_->frameExists(frame))
+  {
+    error = "Frame [" + frame + "] does not exist";
+    if (frame == fixed_frame_)
+    {
+      error = "Fixed " + error;
+    }
+    return true;
+  }
 
   return false;
 }

@@ -1,6 +1,7 @@
 add_subdirectory(default_plugin)
 
 include_directories(.)
+include_directories("/opt/ros/hydro/include")
 
 # Build the version number and other build-time constants into the
 # source for access at run-time.
@@ -181,8 +182,6 @@ add_library( ${PROJECT_NAME}
   yaml_config_writer.cpp
   default_plugin/view_controllers/orbit_view_controller.cpp
       default_plugin/tools/move_tool.cpp
-
-  ../ros/time.cpp
   ${ENV_CONFIG_FILE}
   ${MOC_FILES}
 )
@@ -197,6 +196,9 @@ target_link_libraries(${PROJECT_NAME}
   assimp
   yaml-cpp
   tinyxml
+  resource_retriever
+  tf
+  time
 )
 
 if(APPLE)

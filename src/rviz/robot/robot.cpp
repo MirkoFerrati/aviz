@@ -49,6 +49,7 @@
 #include <OGRE/OgreResourceGroupManager.h>
 
 #include <ros/console.h>
+#include <ros/ros.h>
 #include <ros/assert.h>
 
 namespace rviz

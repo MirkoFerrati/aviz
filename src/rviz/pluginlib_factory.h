@@ -131,13 +131,28 @@ public:
   {
     QString package = "rviz";//getClassPackage( class_id );
     QString class_name = class_id;//getClassName( class_id );
+    std::cout<<class_id.toStdString()<<std::endl;
+    if (class_name.contains("rviz/"))
+    {
+        class_name=class_name.remove("rviz/");
+    }
+    std::cout<<class_id.toStdString()<<std::endl;
+    
     QIcon icon = loadPixmap( "package://"+package+"/icons/classes/"+class_name+".svg" );
     if ( icon.isNull() )
     {
-      icon = loadPixmap( "package://"+package+"/icons/classes/"+class_name+".png" );
+      QIcon icon = loadPixmap( "package://"+package+"/icons/"+class_name+".svg" );
       if ( icon.isNull() )
       {
-        icon = loadPixmap( "package://rviz/icons/default_class_icon.png");
+        icon = loadPixmap( "package://"+package+"/icons/classes/"+class_name+".png" );
+        if ( icon.isNull() )
+        {
+            QIcon icon = loadPixmap( "package://"+package+"/icons/"+class_name+".png" );
+            if ( icon.isNull() )
+            {
+                icon = loadPixmap( "package://"+package+"/icons/default_class_icon.png");
+            }
+        }
       }
     }
     return icon;

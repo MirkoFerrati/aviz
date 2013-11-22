@@ -33,7 +33,7 @@
 #include "visualization_manager.h"
 
 #include <ros/assert.h>
-
+#include <ros/console.h>
 #include <OGRE/OgreSceneNode.h>
 #include <OGRE/OgreSceneManager.h>
 #include <OGRE/OgreManualObject.h>

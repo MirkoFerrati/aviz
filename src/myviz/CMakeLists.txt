@@ -1,3 +1,5 @@
+
+
 cmake_minimum_required(VERSION 2.8.3)
 project(librviz_tutorial)
 
@@ -8,6 +10,7 @@ include(${QT_USE_FILE})
 ## I prefer the Qt signals and slots to avoid defining "emit", "slots",
 ## etc because they can conflict with boost signals, so define QT_NO_KEYWORDS here.
 add_definitions(-DQT_NO_KEYWORDS)
+include_directories("/opt/ros/hydro/include")
 
 ## Here we specify which header files need to be run through "moc",
 ## Qt's meta-object compiler.
@@ -29,8 +32,9 @@ set(SOURCE_FILES
 ## collected above in ``${SOURCE_FILES}``.
 add_executable(myviz ${SOURCE_FILES})
 
+
 ## Link the myviz executable with whatever Qt libraries have been defined by
 ## the ``find_package(Qt4 ...)`` line above, and with whatever libraries
 ## catkin has included.
-target_link_libraries(myviz ${QT_LIBRARIES} default_plugin )
+target_link_libraries(myviz ${QT_LIBRARIES} default_plugin  tinyxml ${urdfdom_LIBRARIES} urdf resource_retriever)
 ## END_TUTORIAL

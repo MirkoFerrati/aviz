@@ -36,6 +36,7 @@
 #include "rviz/render_panel.h"
 #include "rviz/display.h"
 #include "rviz/default_plugin/grid_display.h"
+#include <rviz/default_plugin/robot_model_display.h>
 #include "myviz.h"
 
 // BEGIN_TUTORIAL
@@ -94,6 +95,15 @@ MyViz::MyViz( QWidget* parent )
   // Initialize the slider values.
   thickness_slider->setValue( 25 );
   cell_size_slider->setValue( 10 );
+  
+  
+  rviz::Display* robot=new rviz::RobotModelDisplay();
+  robot_ = manager_->createDisplay(robot, "urdf robot",true);
+  ROS_ASSERT( robot_ != NULL );
+  
+  //robot_->subProp("Robot Description")->setValue("/opt/ros/hydro/share/urdf_tutorial/05-visual.urdf");
+  robot_->subProp("Robot Description")->setValue("/home/mirko/projects/walkman/rivz/rviz/src/myviz/pi_robot.urdf");
+  
 }
 
 // Destructor.

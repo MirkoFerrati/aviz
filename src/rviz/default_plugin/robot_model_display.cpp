@@ -158,6 +158,8 @@ void RobotModelDisplay::load()
 //       return;
 //     }
 //   }
+//   
+  content=robot_description_property_->getStdString();
 
   if( content.empty() )
   {
@@ -173,17 +175,18 @@ void RobotModelDisplay::load()
 
   robot_description_ = content;
 
-  TiXmlDocument doc;
-  doc.Parse( robot_description_.c_str() );
-  if( !doc.RootElement() )
-  {
-    clear();
-    setStatus( StatusProperty::Error, "URDF", "URDF failed XML parse" );
-    return;
-  }
+//   TiXmlDocument doc;
+//   doc.Parse( robot_description_.c_str() );
+//   if( !doc.RootElement() )
+//   {
+//     clear();
+//     setStatus( StatusProperty::Error, "URDF", "URDF failed XML parse" );
+//     return;
+//   }
 
   urdf::Model descr;
-  if( !descr.initXml( doc.RootElement() ))
+ // if( !descr.initXml( doc.RootElement() ))
+  if (!descr.initFile(robot_description_))
   {
     clear();
     setStatus( StatusProperty::Error, "URDF", "URDF failed Model parse" );
@@ -247,5 +250,5 @@ void RobotModelDisplay::reset()
 
 } // namespace rviz
 
-#include <pluginlib/class_list_macros.h>
-PLUGINLIB_EXPORT_CLASS( rviz::RobotModelDisplay, rviz::Display )
+// #include <pluginlib/class_list_macros.h>
+// PLUGINLIB_EXPORT_CLASS( rviz::RobotModelDisplay, rviz::Display )

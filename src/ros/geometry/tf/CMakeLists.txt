@@ -11,7 +11,7 @@ find_package(Boost REQUIRED thread signals)
 include_directories(SYSTEM ${Boost_INCLUDE_DIR}
 #                            ${catkin_INCLUDE_DIRS}
 )
-include_directories(include)
+include_directories(tf/include)
 # link_directories(${catkin_LIBRARY_DIRS})
 
 #add_message_files(DIRECTORY msg FILES tfMessage.msg)

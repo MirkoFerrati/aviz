@@ -28,8 +28,8 @@
 #include "resource_retriever/retriever.h"
 
 #include <string.h>
-
-#include <ros/package.h>
+#include <vector>
+// #include <ros/package.h>
 #include <ros/console.h>
 
 #include <curl/curl.h>

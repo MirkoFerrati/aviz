@@ -37,7 +37,9 @@
 #include "rviz/display.h"
 #include "rviz/default_plugin/grid_display.h"
 #include <rviz/default_plugin/robot_model_display.h>
+#include <rviz/frame_manager.h>
 #include "myviz.h"
+#include <tf/transform_datatypes.h>
 
 // BEGIN_TUTORIAL
 // Constructor for MyViz.  This does most of the work of the class.
@@ -98,6 +100,14 @@ MyViz::MyViz( QWidget* parent )
   
   
   rviz::Display* robot=new rviz::RobotModelDisplay();
+  tf::StampedTransform t;
+  t.stamp_ = ros::Time(1);
+  t.frame_id_ = "base_link";
+  t.child_frame_id_ = "0";
+  t.setIdentity();
+  t.setOrigin(tf::Vector3(1,0,0));
+  manager_->getFrameManager()->getTFClientPtr()->setTransform(t, "default_authority");
+  
   robot_ = manager_->createDisplay(robot, "urdf robot",true);
   ROS_ASSERT( robot_ != NULL );
   

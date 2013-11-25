@@ -1,3 +1,7 @@
+
+include_directories(ros/geometry/tf/include)
+include_directories(ros/geometry_experimental/tf2/include)
+
 add_subdirectory(rviz)
 #add_subdirectory(image_view)
 #add_subdirectory(test)

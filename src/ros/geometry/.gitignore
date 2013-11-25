@@ -1,0 +1,9 @@
+<<<<<<< HEAD
+*.pyc
+=======
+*~
+*.pyc
+bin
+build
+lib
+>>>>>>> 0b5883e25a061f28e8032228edaee38cc1b8a9ea

@@ -199,6 +199,7 @@ target_link_libraries(${PROJECT_NAME}
   resource_retriever
   tf
   time
+  package
 )
 
 if(APPLE)

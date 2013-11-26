@@ -62,7 +62,7 @@
 #include "rviz/robot/robot_link.h"
 #include "rviz/robot/robot_joint.h"
 
-#define ROS_PACKAGE_NAME "/home/mirko/projects/walkman/rivz/rviz/"
+#define ROS_PACKAGE_NAME "rviz"
 
 
 namespace fs=boost::filesystem;

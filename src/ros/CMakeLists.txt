@@ -7,5 +7,5 @@ include_directories(geometry)
 add_subdirectory(geometry_experimental)
 include_directories(geometry_experimental)
 
-
+add_library(package package.cpp)
 add_library(time time.cpp)

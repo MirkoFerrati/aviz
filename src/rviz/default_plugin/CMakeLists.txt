@@ -109,7 +109,7 @@ set(SOURCE_FILES
 )
 
 add_library(default_plugin ${SOURCE_FILES})
-target_link_libraries(default_plugin ${PROJECT_NAME} ${catkin_LIBRARIES} ${QT_LIBRARIES} ${OGRE_LIBRARIES} ${Boost_LIBRARIES} ${urdfdom_LIBRARIES} resource_retriever)
+target_link_libraries(default_plugin package ${PROJECT_NAME} ${catkin_LIBRARIES} ${QT_LIBRARIES} ${OGRE_LIBRARIES} ${Boost_LIBRARIES} ${urdfdom_LIBRARIES} resource_retriever)
 
 # install(TARGETS default_plugin
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}

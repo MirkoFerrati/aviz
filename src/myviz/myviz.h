@@ -44,7 +44,7 @@ class MyViz: public QWidget
 {
 Q_OBJECT
 public:
-  MyViz( QWidget* parent = 0 );
+  MyViz(std::string config_path, QWidget* parent = 0 );
   virtual ~MyViz();
 
 private Q_SLOTS:

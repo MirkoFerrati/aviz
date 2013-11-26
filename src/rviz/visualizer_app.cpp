@@ -45,6 +45,7 @@
 #endif
 
 #include <ros/ros.h>
+#include <ros/package.h>
 
 #include "rviz/selection/selection_manager.h"
 #include "rviz/env_config.h"
@@ -126,6 +127,7 @@ bool VisualizerApp::init( int argc, char** argv )
     po::options_description options;
     options.add_options()
       ("help,h", "Produce this help message")
+      ("package-path,p",po::value<std::string>(),"The path of the package rviz, since we are not using ROS to find it")
       ("splash-screen,s", po::value<std::string>(), "A custom splash-screen image to display")
       ("help-file", po::value<std::string>(), "A custom html file to show as the help screen")
       ("display-config,d", po::value<std::string>(), "A display config file (.rviz) to load")
@@ -144,13 +146,20 @@ bool VisualizerApp::init( int argc, char** argv )
     {
       po::store( po::parse_command_line( argc, argv, options ), vm );
       po::notify( vm );
-
       if( vm.count( "help" ))
       {
         std::cout << "rviz command line options:\n" << options;
         return false;
       }
-
+      if (!vm.count("package-path"))
+      {
+	std::cout<< "please specify option package-path\n"<<options<<std::endl;
+	return false;
+      }
+      else
+      {
+ 	ros::package::setPath(vm["package-path"].as<std::string>());
+      }
       if( vm.count( "in-mc-wrapper" ))
       {
         in_mc_wrapper = true;

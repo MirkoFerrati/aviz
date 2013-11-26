@@ -10,6 +10,12 @@ find_package(Boost REQUIRED
   thread
 )
 
+## if ROS is installed in the current system, it is possible to use the following 4 lines instead of having all the packages inside aviz
+# set(urdfdom_DIR /opt/ros/hydro/share/urdfdom/cmake/)
+# set(urdfdom_headers_DIR /opt/ros/hydro/share/urdfdom_headers/cmake/)
+# set(orocos_kdl_DIR /opt/ros/hydro/share/orocos_kdl/)
+# set(console_bridge_DIR /opt/ros/hydro/share/console_bridge/cmake/)
+
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR})
 
 find_package(Eigen REQUIRED)

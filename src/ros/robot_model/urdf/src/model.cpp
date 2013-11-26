@@ -42,7 +42,7 @@
    other parsers are loaded via plugins (if available) */
 #include <urdf_parser/urdf_parser.h>
 #include <urdf_parser_plugin/parser.h>
-#include <pluginlib/class_loader.h>
+//#include <pluginlib/class_loader.h>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/scoped_ptr.hpp>

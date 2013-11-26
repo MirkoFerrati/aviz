@@ -2,8 +2,8 @@
 //#define ROS_H_MIRKO
 
 
-#define ROS_PACKAGE_NAME "/home/mirko/projects/walkman/rivz/rviz/"
-
+//#define ROS_PACKAGE_NAME "/home/mirko/projects/walkman/rivz/rviz/"
+#define ROS_PACKAGE_NAME "rviz"
 //#include </opt/ros/hydro/include/ros/ros.h>
 
 #include "ros/time.h"

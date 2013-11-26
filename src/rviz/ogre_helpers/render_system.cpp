@@ -43,7 +43,7 @@
 #undef CursorShape
 #endif
 
-//#include <ros/package.h> // This dependency should be moved out of here, it is just used for a search path.
+#include <ros/package.h> // This dependency should be moved out of here, it is just used for a search path. //I agree with you, but in a more general way, it should be moved out of the project
 #include <ros/console.h>
 #include <ros/ros.h>
 #include <OGRE/OgreRenderWindow.h>
@@ -81,9 +81,9 @@ RenderSystem::RenderSystem()
 {
   OgreLogging::configureLogging();
 
-  //std::string rviz_path = ros::package::getPath(ROS_PACKAGE_NAME);
+  std::string rviz_path = ros::package::getPath(ROS_PACKAGE_NAME);
 
-std::string rviz_path = "/home/mirko/projects/walkman/rivz/rviz";
+  //std::string rviz_path = "/home/mirko/projects/walkman/rivz/rviz";
   setupDummyWindowId();
   ogre_root_ = new Ogre::Root( rviz_path+"/ogre_media/plugins.cfg" );
   loadOgrePlugins();
@@ -224,7 +224,8 @@ void RenderSystem::setupRenderSystem()
 
 void RenderSystem::setupResources()
 {
-  std::string rviz_path = "/home/mirko/projects/walkman/rivz/rviz/";//ros::package::getPath(ROS_PACKAGE_NAME);
+  //std::string rviz_path = "/home/mirko/projects/walkman/rivz/rviz/";
+  std::string rviz_path = ros::package::getPath(ROS_PACKAGE_NAME);
   Ogre::ResourceGroupManager::getSingleton().addResourceLocation( rviz_path + "/ogre_media", "FileSystem", ROS_PACKAGE_NAME );
   Ogre::ResourceGroupManager::getSingleton().addResourceLocation( rviz_path + "/ogre_media/textures", "FileSystem", ROS_PACKAGE_NAME );
   Ogre::ResourceGroupManager::getSingleton().addResourceLocation( rviz_path + "/ogre_media/fonts", "FileSystem", ROS_PACKAGE_NAME );

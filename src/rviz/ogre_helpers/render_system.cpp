@@ -81,9 +81,9 @@ RenderSystem::RenderSystem()
 {
   OgreLogging::configureLogging();
 
-  //std::string rviz_path = ros::package::getPath(ROS_PACKAGE_NAME);
+  std::string rviz_path = ros::package::getPath(ROS_PACKAGE_NAME);
 
-std::string rviz_path = "/home/mirko/projects/walkman/rivz/rviz";
+  //std::string rviz_path = "/home/mirko/projects/walkman/rivz/rviz";
   setupDummyWindowId();
   ogre_root_ = new Ogre::Root( rviz_path+"/ogre_media/plugins.cfg" );
   loadOgrePlugins();
@@ -224,7 +224,8 @@ void RenderSystem::setupRenderSystem()
 
 void RenderSystem::setupResources()
 {
-  std::string rviz_path = "/home/mirko/projects/walkman/rivz/rviz/";//ros::package::getPath(ROS_PACKAGE_NAME);
+  //std::string rviz_path = "/home/mirko/projects/walkman/rivz/rviz/";
+  std::string rviz_path = ros::package::getPath(ROS_PACKAGE_NAME);
   Ogre::ResourceGroupManager::getSingleton().addResourceLocation( rviz_path + "/ogre_media", "FileSystem", ROS_PACKAGE_NAME );
   Ogre::ResourceGroupManager::getSingleton().addResourceLocation( rviz_path + "/ogre_media/textures", "FileSystem", ROS_PACKAGE_NAME );
   Ogre::ResourceGroupManager::getSingleton().addResourceLocation( rviz_path + "/ogre_media/fonts", "FileSystem", ROS_PACKAGE_NAME );

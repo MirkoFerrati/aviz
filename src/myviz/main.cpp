@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 
   QApplication app( argc, argv );
 
-  MyViz* myviz = new MyViz();
+  MyViz* myviz = new MyViz("config.yaml");
   myviz->show();
 
   app.exec();

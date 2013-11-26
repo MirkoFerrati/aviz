@@ -133,7 +133,8 @@ VisualizationFrame::VisualizationFrame( QWidget* parent )
   post_load_timer_->setSingleShot( true );
   connect( post_load_timer_, SIGNAL( timeout() ), this, SLOT( markLoadingDone() ));
 
-  package_path_ ="/home/mirko/projects/walkman/rivz/rviz"; //ros::package::getPath("rviz");
+  //package_path_ ="/home/mirko/projects/walkman/rivz/rviz";
+  package_path_=ros::package::getPath("rviz");
   help_path_ = QString::fromStdString( (fs::path(package_path_) / "help/help.html").BOOST_FILE_STRING() );
   splash_path_ = QString::fromStdString( (fs::path(package_path_) / "images/splash.png").BOOST_FILE_STRING() );
 

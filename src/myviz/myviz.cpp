@@ -38,14 +38,47 @@
 #include "rviz/default_plugin/grid_display.h"
 #include <rviz/default_plugin/robot_model_display.h>
 #include <rviz/frame_manager.h>
+#include <rviz/yaml_config_reader.h>
 #include "myviz.h"
 #include <tf/transform_datatypes.h>
+#include <../package.h>
 
 // BEGIN_TUTORIAL
 // Constructor for MyViz.  This does most of the work of the class.
-MyViz::MyViz( QWidget* parent )
+MyViz::MyViz(std::string config_file , QWidget* parent)
   : QWidget( parent )
 {
+  
+    QString urdf_file, path_file;
+    rviz::YamlConfigReader reader;
+    rviz::Config cfg;
+    reader.readFile( cfg, config_file );
+    if( !reader.error() )
+    {
+      int height, width;
+      if( cfg.mapGetInt( "Height", &height ) &&
+          cfg.mapGetInt( "Width", &width ))
+      {
+        resize( width, height );
+      }
+       if (!cfg.mapGetString("Urdf",&urdf_file))
+       {
+	 std::cout<<"error in finding urdf file inside configuration, please add Urdf: yourfile.urdf"<<std::endl;
+       }
+       if (cfg.mapGetString("PackagePath",&path_file))
+       {
+	 ros::package::setPath(path_file.toStdString());
+       }
+	 else
+       {
+	 std::cout<<"error in finding path file inside configuration, please add PackagePath: path_to_rviz"<<std::endl;
+       }
+    }
+    else
+    {
+      printf( "%s", qPrintable( reader.errorMessage() ));
+    }
+  
   // Construct and lay out labels and slider controls.
   QLabel* thickness_label = new QLabel( "Line Thickness" );
   QSlider* thickness_slider = new QSlider( Qt::Horizontal );
@@ -84,7 +117,6 @@ MyViz::MyViz( QWidget* parent )
   render_panel_->initialize( manager_->getSceneManager(), manager_ );
   manager_->initialize();
   manager_->startUpdate();
-
   // Create a Grid display.
   rviz::Display* temp=new rviz::GridDisplay();
   grid_ = manager_->createDisplay( temp, "adjustable grid", true );
@@ -112,8 +144,8 @@ MyViz::MyViz( QWidget* parent )
   ROS_ASSERT( robot_ != NULL );
   
   //robot_->subProp("Robot Description")->setValue("/opt/ros/hydro/share/urdf_tutorial/05-visual.urdf");
-  robot_->subProp("Robot Description")->setValue("/home/mirko/projects/walkman/rivz/rviz/src/myviz/pi_robot.urdf");
-  
+  //robot_->subProp("Robot Description")->setValue("/home/mirko/projects/walkman/rivz/rviz/src/myviz/pi_robot.urdf");
+  robot_->subProp("Robot Description")->setValue(urdf_file);
 }
 
 // Destructor.

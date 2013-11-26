@@ -29,7 +29,7 @@
 
 #include <string.h>
 #include <vector>
-// #include <ros/package.h>
+#include <ros/package.h>
 #include <ros/console.h>
 
 #include <curl/curl.h>
@@ -109,7 +109,7 @@ MemoryResource Retriever::get(const std::string& url)
 
     std::string package = mod_url.substr(0, pos);
     mod_url.erase(0, pos);
-    std::string package_path = "/home/mirko/projects/walkman/rivz/rviz/"; //ros::package::getPath(package);
+    std::string package_path = ros::package::getPath(package); //"/home/mirko/projects/walkman/rivz/rviz/"; 
 
     if (package_path.empty())
     {

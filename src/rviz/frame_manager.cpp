@@ -259,8 +259,6 @@ bool FrameManager::transform(const std::string& frame, ros::Time time, const geo
     return false;
   }
 
-  std::cout<<"SIAMO QUI A CAPIRE SE FUNZIONA"<<std::endl;
-  
   bt_position = pose_out.getOrigin();
   position = Ogre::Vector3(bt_position.x(), bt_position.y(), bt_position.z());
 

@@ -16,6 +16,6 @@ namespace ros{
   }
 }
 
-
+extern std::string GLOBAL_PACKAGE_PATH;
 
 #endif //MIRKO_PACKAGE_H

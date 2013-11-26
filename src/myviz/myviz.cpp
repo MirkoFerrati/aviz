@@ -134,11 +134,20 @@ MyViz::MyViz(std::string config_file , QWidget* parent)
   rviz::Display* robot=new rviz::RobotModelDisplay();
   tf::StampedTransform t;
   t.stamp_ = ros::Time(1);
-  t.frame_id_ = "base_link";
-  t.child_frame_id_ = "0";
+  t.frame_id_ = "map";
+  t.child_frame_id_ = "torso_link";
   t.setIdentity();
   t.setOrigin(tf::Vector3(1,0,0));
   manager_->getFrameManager()->getTFClientPtr()->setTransform(t, "default_authority");
+  tf::StampedTransform t2;
+  t2.stamp_ = ros::Time(1);
+  t2.frame_id_ = "torso_link";
+  t2.child_frame_id_ = "neck_link";
+  t2.setIdentity();
+  t2.setOrigin(tf::Vector3(1,2,3));
+  manager_->getFrameManager()->getTFClientPtr()->setTransform(t2, "default_authority");
+
+// //   tf::StampedTransform transform;
   
   robot_ = manager_->createDisplay(robot, "urdf robot",true);
   ROS_ASSERT( robot_ != NULL );

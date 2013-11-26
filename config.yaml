@@ -1,0 +1,2 @@
+- Urdf: "pi_robot.urdf" #just copy this file inside the executable folder and you are good
+- PackagePath: "../../../" #this is true if you are running from build/src/rviz/

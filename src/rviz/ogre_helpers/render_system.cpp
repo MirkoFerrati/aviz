@@ -43,7 +43,7 @@
 #undef CursorShape
 #endif
 
-//#include <ros/package.h> // This dependency should be moved out of here, it is just used for a search path.
+#include <ros/package.h> // This dependency should be moved out of here, it is just used for a search path. //I agree with you, but in a more general way, it should be moved out of the project
 #include <ros/console.h>
 #include <ros/ros.h>
 #include <OGRE/OgreRenderWindow.h>

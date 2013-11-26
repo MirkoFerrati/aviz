@@ -52,7 +52,7 @@ MyViz::MyViz(std::string config_file , QWidget* parent)
     QString urdf_file, path_file;
     rviz::YamlConfigReader reader;
     rviz::Config cfg;
-    reader.readFile( cfg, config_file );
+    reader.readFile( cfg, QString(config_file.c_str()) );
     if( !reader.error() )
     {
       int height, width;

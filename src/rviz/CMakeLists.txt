@@ -78,6 +78,7 @@ qt4_wrap_cpp(MOC_FILES
   selection_panel.h
   tool_properties_panel.h
     default_plugin/view_controllers/orbit_view_controller.h
+  default_plugin/tools/interaction_tool.h
 
 )
 
@@ -181,7 +182,16 @@ add_library( ${PROJECT_NAME}
   yaml_config_reader.cpp
   yaml_config_writer.cpp
   default_plugin/view_controllers/orbit_view_controller.cpp
-      default_plugin/tools/move_tool.cpp
+  default_plugin/tools/move_tool.cpp
+  default_plugin/tools/focus_tool.cpp
+  default_plugin/tools/measure_tool.cpp
+  default_plugin/tools/move_tool.cpp
+  default_plugin/tools/point_tool.cpp
+  default_plugin/tools/pose_tool.cpp
+  #default_plugin/tools/goal_tool.cpp
+  #default_plugin/tools/initial_pose_tool.cpp
+  default_plugin/tools/selection_tool.cpp
+  default_plugin/tools/interaction_tool.cpp
   ${ENV_CONFIG_FILE}
   ${MOC_FILES}
 )

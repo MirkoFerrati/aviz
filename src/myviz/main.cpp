@@ -44,12 +44,12 @@ int main(int argc, char **argv)
 //     ros::init( argc, argv, "myviz", ros::init_options::AnonymousName );
 //   }
 
-  QApplication app( argc, argv );
+	QApplication app( argc, argv );
 
-  MyViz* myviz = new MyViz("config.yaml");
-  myviz->show();
+	MyViz* myviz = new MyViz("config.yaml");
+	myviz->show();
 
-  app.exec();
+	app.exec();
 
-  delete myviz;
+	delete myviz;
 }

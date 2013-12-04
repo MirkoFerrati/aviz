@@ -9,3 +9,4 @@ add_subdirectory(rviz)
 
 add_subdirectory(ros)
 add_subdirectory(myviz)
+add_subdirectory(KDLTreeViz)

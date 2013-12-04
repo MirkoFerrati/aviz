@@ -38,6 +38,10 @@
 
 #include "rviz/tool_manager.h"
 #include "default_plugin/tools/move_tool.h"
+#include "default_plugin/tools/interaction_tool.h"
+#include "default_plugin/tools/selection_tool.h"
+#include "default_plugin/tools/initial_pose_tool.h"
+#include "default_plugin/tools/goal_tool.h"
 
 namespace rviz
 {
@@ -71,12 +75,16 @@ void ToolManager::initialize()
   // Possibly this should be done with a loop over
   // factory_->getDeclaredClassIds(), but then I couldn't control the
   // order.
-    Tool* temp=new rviz::MoveTool();
+   Tool* temp=new rviz::MoveTool();
    addTool(temp, "MoveCamera" );
-//   addTool( "rviz/Interact" );
-//   addTool( "rviz/Select" );
-//   addTool( "rviz/SetInitialPose" );
-//   addTool( "rviz/SetGoal" );
+   temp=new rviz::InteractionTool();
+   addTool(temp, "Interact" );
+   temp=new rviz::SelectionTool();
+   addTool(temp, "Select" );
+//    temp=new rviz::InitialPoseTool();
+//    addTool(temp, "SetInitialPose" );
+//    temp=new rviz::GoalTool();
+//    addTool(temp, "SetGoal" );
 }
 
 void ToolManager::removeAll()

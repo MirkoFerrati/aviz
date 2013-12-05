@@ -46,8 +46,6 @@
 #include "../KDLTreeViz/KDLTreeViz.h"
 #include "dlrffh_kdl.h"
 
-void initialTF(const boost::shared_ptr< tf::Transformer > tf);
-
 // BEGIN_TUTORIAL
 // Constructor for MyViz.  This does most of the work of the class.
 MyViz::MyViz(std::string config_file , QWidget* parent)
@@ -140,85 +138,47 @@ MyViz::MyViz(std::string config_file , QWidget* parent)
   rviz::Display* robot=new rviz::RobotModelDisplay();
   
   
-  
-//   tf::StampedTransform t;
-//   t.stamp_ = ros::Time(1);
-//   t.frame_id_ = "map";
-//   t.child_frame_id_ = "world_link";
-//   t.setIdentity();
-//   t.setOrigin(tf::Vector3(2,0,0));
-//   manager_->getFrameManager()->getTFClientPtr()->setTransform(t, "default_authority");
-  initialTF(manager_->getFrameManager()->getTFClientPtr());
-//   tf::StampedTransform t2;
-//   t2.stamp_ = ros::Time(1);
-//   t2.frame_id_ = "torso_link";
-//   t2.child_frame_id_ = "neck_link";
-//   t2.setIdentity();
-//   t2.setOrigin(tf::Vector3(1,0,0));
-//   manager_->getFrameManager()->getTFClientPtr()->setTransform(t2, "default_authority");
-// 
-// 	t.stamp_ = ros::Time(1);
-// 	t.frame_id_ = "map";
-// 	t.child_frame_id_ = "torso_link";
-// 	t.setIdentity();
-// 	t.setOrigin(tf::Vector3(0,2,0));
-// 	manager_->getFrameManager()->getTFClientPtr()->setTransform(t, "default_authority");
-// 	t.stamp_ = ros::Time(1);
-// 	t.frame_id_ = "map";
-// 	t.child_frame_id_ = "neck_link";
-// 	t.setIdentity();
-// 	t.setOrigin(tf::Vector3(1,0,0));
-// 	manager_->getFrameManager()->getTFClientPtr()->setTransform(t, "default_authority");
-// 	t.stamp_ = ros::Time(1);
-// 	t.frame_id_ = "map";
-// 	t.child_frame_id_ = "torso_link";
-// 	t.setIdentity();
-// 	t.setOrigin(tf::Vector3(0,4,0));
-// 	manager_->getFrameManager()->getTFClientPtr()->setTransform(t, "default_authority");
-
-// //   tf::StampedTransform transform;
-  
-  robot_ = manager_->createDisplay(robot,"urdf robot",true);
-  ROS_ASSERT( robot_ != NULL );
-  
-  //robot_->subProp("Robot Description")->setValue("/opt/ros/hydro/share/urdf_tutorial/05-visual.urdf");
-  //robot_->subProp("Robot Description")->setValue("/home/mirko/projects/walkman/rivz/rviz/src/myviz/pi_robot.urdf");
-  robot_->subProp("Robot Description")->setValue(urdf_file);
-  
-  
-  
 	dlrffh_kdl* right;
 	KDL::Chain thumb; //,middle,ring,pinky;
 	right = new dlrffh_kdl(urdf_file.toStdString());
 	
-// 	right->print_tree();
-
 	std::map< std::string, double > q_in;
 	KDLTreeViz treeViz(right->getTree(),manager_->getFrameManager()->getTFClientPtr());
-	q_in.insert(std::pair<std::string,double>("right_index_abd_link",20*DEG2RAD));
-	q_in.insert(std::pair<std::string,double>("right_index_distal_link",20*DEG2RAD));
-	q_in.insert(std::pair<std::string,double>("right_index_medial_link",20*DEG2RAD));
-	q_in.insert(std::pair<std::string,double>("right_index_proximal_link",20*DEG2RAD));
-	q_in.insert(std::pair<std::string,double>("right_middle_abd_link",0));
+
+	treeViz.setInitialVisualization();
+
+// 	Collection of strings usable for right DLR HIT2 hand
+	q_in.insert(std::pair<std::string,double>("right_index_abd_link",10*DEG2RAD));
+	q_in.insert(std::pair<std::string,double>("right_index_distal_link",0));
+	q_in.insert(std::pair<std::string,double>("right_index_medial_link",0));
+	q_in.insert(std::pair<std::string,double>("right_index_proximal_link",0));
+	q_in.insert(std::pair<std::string,double>("right_middle_abd_link",10*DEG2RAD));
 	q_in.insert(std::pair<std::string,double>("right_middle_distal_link",0));
 	q_in.insert(std::pair<std::string,double>("right_middle_medial_link",0));
 	q_in.insert(std::pair<std::string,double>("right_middle_proximal_link",0));
 	q_in.insert(std::pair<std::string,double>("right_palm_link",0));
-	q_in.insert(std::pair<std::string,double>("right_pinky_abd_link",0));
+	q_in.insert(std::pair<std::string,double>("right_pinky_abd_link",10*DEG2RAD));
 	q_in.insert(std::pair<std::string,double>("right_pinky_distal_link",0));
 	q_in.insert(std::pair<std::string,double>("right_pinky_medial_link",0));
 	q_in.insert(std::pair<std::string,double>("right_pinky_proximal_link",0));
-	q_in.insert(std::pair<std::string,double>("right_ring_abd_link",0));
+	q_in.insert(std::pair<std::string,double>("right_ring_abd_link",10*DEG2RAD));
 	q_in.insert(std::pair<std::string,double>("right_ring_distal_link",0));
 	q_in.insert(std::pair<std::string,double>("right_ring_medial_link",0));
 	q_in.insert(std::pair<std::string,double>("right_ring_proximal_link",0));
-	q_in.insert(std::pair<std::string,double>("right_thumb_abd_link",0));
+	q_in.insert(std::pair<std::string,double>("right_thumb_abd_link",10*DEG2RAD));
 	q_in.insert(std::pair<std::string,double>("right_thumb_distal_link",0));
 	q_in.insert(std::pair<std::string,double>("right_thumb_medial_link",0));
 	q_in.insert(std::pair<std::string,double>("right_thumb_proximal_link",0));
 
 	treeViz.setPose(q_in);
 	
+	robot_ = manager_->createDisplay(robot,"urdf robot",true);
+	ROS_ASSERT( robot_ != NULL );
+	
+	//robot_->subProp("Robot Description")->setValue("/opt/ros/hydro/share/urdf_tutorial/05-visual.urdf");
+	//robot_->subProp("Robot Description")->setValue("/home/mirko/projects/walkman/rivz/rviz/src/myviz/pi_robot.urdf");
+	robot_->subProp("Robot Description")->setValue(urdf_file);
+
 }
 
 // Destructor.
@@ -247,165 +207,5 @@ void MyViz::setCellSize( int cell_size_percent )
   {
     grid_->subProp( "Cell Size" )->setValue( cell_size_percent / 10.0f );
   }
-}
-
-
-
-void initialTF(const boost::shared_ptr< tf::Transformer > tf)
-{
-tf::StampedTransform t;
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_index_abd_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_index_distal_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_index_medial_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_index_proximal_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_middle_abd_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_middle_distal_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_middle_medial_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_middle_proximal_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,1));
-t.child_frame_id_ = "right_palm_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_pinky_abd_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_pinky_distal_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_pinky_medial_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_pinky_proximal_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_ring_abd_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_ring_distal_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_ring_medial_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_ring_proximal_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_thumb_abd_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_thumb_distal_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_thumb_medial_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "right_thumb_proximal_link";
-tf->setTransform(t,"default_authority");
-
-t.stamp_ = ros::Time(1);
-t.frame_id_ = "map";
-t.setIdentity();
-t.setOrigin(tf::Vector3(0,0,0));
-t.child_frame_id_ = "world_link";
-tf->setTransform(t,"default_authority");
 }
 

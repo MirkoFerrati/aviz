@@ -1,7 +1,5 @@
 #include <kdl/tree.hpp>
-// #include <tf/transform_datatypes.h>
 #include <boost/shared_ptr.hpp>
-// #include <geometry_msgs/Pose.h>
 #include <tf/tf.h>
 
 class KDLTreeViz
@@ -31,5 +29,10 @@ public:
 	 * @param q_in map of joint angles (the key is the segment name)
 	 */
 	void setPose(std::map<std::string,double> q_in);
+	
+	/**
+	 * @brief Set initial visualization (link root segment to the map and put zero as a configuration for each joint
+	 */
+	void setInitialVisualization();
 	
 };

@@ -32,8 +32,7 @@ endif(NOT orocos_kdl_FOUND)
 ## I prefer the Qt signals and slots to avoid defining "emit", "slots",
 ## etc because they can conflict with boost signals, so define QT_NO_KEYWORDS here.
 add_definitions(-DQT_NO_KEYWORDS)
-
-include_directories("../rviz/")
+#include_directories("../rviz/")
 include_directories("/opt/ros/hydro/include")
 
 ## Here we specify which header files need to be run through "moc",

@@ -17,7 +17,7 @@ void KDLTreeViz::setPose(std::map< std::string, double > q_in)
 	
 	for (std::map<std::string,double>::const_iterator it = q_in.begin(); it != q_in.end(); ++it)
 	{
-		std::cout << "Looking for... " << it->first << std::endl;
+// 		std::cout << "Looking for... " << it->first << std::endl;
 		
 		KDL::Segment elem,childElem;
 		double x,y,z,w;
@@ -26,7 +26,7 @@ void KDLTreeViz::setPose(std::map< std::string, double > q_in)
 
 		child = elem.getName();
 		parent = tree_elem_it->second.parent->second.segment.getName();
-		std::cout << "Parent: " << parent << std::endl;
+// 		std::cout << "Parent: " << parent << std::endl;
 		
 		frame = elem.pose(it->second);
 		frame.M.GetQuaternion(x,y,z,w);
@@ -47,12 +47,13 @@ void KDLTreeViz::setPose(std::map< std::string, double > q_in)
 void KDLTreeViz::setInitialVisualization()
 {
 	std::map< std::string, double > q_in;
-
+	std::cout << std::endl;
+	
 	for (KDL::SegmentMap::const_iterator it = this->tree_.getSegments().begin(); it != this->tree_.getSegments().end(); ++it)
 	{
 		if (it->second.segment.getName() != this->tree_.getRootSegment()->second.segment.getName())
 		{
-			std::cout << it->second.segment.getName() << std::endl;
+// 			std::cout << it->second.segment.getName() << std::endl;
 			q_in.insert(std::pair<std::string,double>(it->second.segment.getName(),0));
 		}
 	}
@@ -64,7 +65,10 @@ void KDLTreeViz::setInitialVisualization()
 	t.setIdentity();
 	t.setOrigin(tf::Vector3(0,0,0));
 	t.child_frame_id_ = this->tree_.getRootSegment()->second.segment.getName();
+	std::cout << "RootSegmentName: " << t.child_frame_id_ << std::endl;
 	this->tf_->setTransform(t,"default_authority");
+	
+	this->setPose(q_in);
 }
 
 

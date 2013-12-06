@@ -1,2 +1,8 @@
-Urdf: "pi_robot.urdf" #just copy this file inside the executable folder and you are good
-PackagePath: "../../../" #this is true if you are running from build/src/rviz/
+Urdf: "pi_robot.urdf" #just copy this file inside the executable folder and you are good (or put the right path to it)
+PackagePath: "../../../" #this is the path to rviz stuff - true if you are running from build/src/rviz/
+TreeNr: "0" #number of different packages to define here, used in the urdf file
+TreeName0: "dlr_description" #name used as package_name for the robot model in the urdf ("package://${Treename}/path_to_something_else")
+TreePath0: "/home/hamal/projects/aviz/build/src/myviz/dlr_description/" #actual path to substitute the package_name with
+TreeName1: "lwr_description"
+TreePath1: "/home/hamal/projects/aviz/build/src/myviz/lwr_description/"
+

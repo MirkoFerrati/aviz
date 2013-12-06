@@ -13,6 +13,8 @@ namespace ros{
     void setPath(std::string);
     void getPlugins(const std::string& package, const std::string& attribute, M_string& plugins);
     void getPlugins(const std::string& package, const std::string& attribute, V_string& plugins);
+	
+	void setTreeVars(const std::vector<std::string>& tree_name,const std::vector<std::string>& tree_path);
   }
 }
 

@@ -8,5 +8,5 @@ add_subdirectory(rviz)
 #add_subdirectory(python_bindings)
 
 add_subdirectory(ros)
-add_subdirectory(myviz)
-add_subdirectory(KDLTreeViz)
+# add_subdirectory(myviz)
+# add_subdirectory(KDLTreeViz)

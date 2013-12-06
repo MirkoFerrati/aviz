@@ -35,7 +35,7 @@
 
 #include <QApplication>
 #include <ros/ros.h>
-#include "myviz.h"
+#include "handArmViz.h"
 
 int main(int argc, char **argv)
 {

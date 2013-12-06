@@ -39,12 +39,12 @@
 #include <rviz/default_plugin/robot_model_display.h>
 #include <rviz/frame_manager.h>
 #include <rviz/yaml_config_reader.h>
-#include "myviz.h"
+#include "handArmViz.h"
 #include <tf/transform_datatypes.h>
 #include <../package.h>
 
-#include "../KDLTreeViz/KDLTreeViz.h"
-#include "dlrffh_kdl.h"
+#include <kdl_format_io/urdf_import.hpp>
+#include "../tools/KDLTreeViz/KDLTreeViz.h"
 
 // BEGIN_TUTORIAL
 // Constructor for MyViz.  This does most of the work of the class.
@@ -53,30 +53,62 @@ MyViz::MyViz(std::string config_file , QWidget* parent)
 {
 	int i = 0;
   
-    QString urdf_file, path_file;
+    QString urdf_file, path_file, tree_name, path_tree, tree_nr;
+	std::vector<std::string> tree_name_vec, path_tree_vec;
     rviz::YamlConfigReader reader;
     rviz::Config cfg;
     reader.readFile( cfg, QString(config_file.c_str()) );
     if( !reader.error() )
     {
-      int height, width;
-      if( cfg.mapGetInt( "Height", &height ) &&
-          cfg.mapGetInt( "Width", &width ))
-      {
-        resize( width, height );
-      }
-       if (!cfg.mapGetString("Urdf",&urdf_file))
-       {
-	 std::cout<<"error in finding urdf file inside configuration, please add Urdf: yourfile.urdf"<<std::endl;
-       }
-       if (cfg.mapGetString("PackagePath",&path_file))
-       {
-	 ros::package::setPath(path_file.toStdString());
-       }
-	 else
-       {
-	 std::cout<<"error in finding path file inside configuration, please add PackagePath: path_to_rviz"<<std::endl;
-       }
+		int height, width;
+		if( cfg.mapGetInt( "Height", &height ) &&
+			cfg.mapGetInt( "Width", &width ))
+		{
+			resize( width, height );
+		}
+		if (!cfg.mapGetString("Urdf",&urdf_file))
+		{
+			std::cout<<"error in finding urdf file inside configuration, please add Urdf: yourfile.urdf"<<std::endl;
+		}
+		if (cfg.mapGetString("PackagePath",&path_file))
+		{
+			ros::package::setPath(path_file.toStdString());
+		}
+		else
+		{
+			std::cout<<"error in finding path file inside configuration, please add PackagePath: path_to_rviz"<<std::endl;
+		}
+		if (cfg.mapGetString("TreeNr",&tree_nr))
+		{
+			std::cout << "TreeNr: " << tree_nr.toInt() << std::endl;
+			for (int i=0; i<tree_nr.toInt(); i++)
+			{
+				if (cfg.mapGetString(QString("TreeName").append(QString::number(i)),&tree_name))
+				{
+					std::cout << QString("TreeName").append(QString::number(i)).toStdString() << tree_name.toStdString() << std::endl;
+					if (cfg.mapGetString(QString("TreePath").append(QString::number(i)),&path_tree))
+					{
+						std::cout << QString("TreePath").append(QString::number(i)).toStdString() << path_tree.toStdString() << std::endl;
+						tree_name_vec.push_back(tree_name.toStdString());
+						path_tree_vec.push_back(path_tree.toStdString());
+					}
+					else
+					{
+						std::cout<<"error in finding path of tree files inside configuration, please add TreePath" << i << ": path_to_tree_files (e.g. meshes)"<<std::endl;
+					}
+				}
+				else
+				{
+					std::cout<<"error in finding tree name inside configuration, please add TreeName" << i << ": name_of_tree_package (e.g. as used in urdf file)"<<std::endl;
+				}
+			}
+			ros::package::setTreeVars(tree_name_vec,path_tree_vec);
+		}
+		else
+		{
+			// NO tree packages to be specified
+			std::cout<<"No Tree packages specified"<<std::endl;
+		}
     }
     else
     {
@@ -138,45 +170,46 @@ MyViz::MyViz(std::string config_file , QWidget* parent)
   rviz::Display* robot=new rviz::RobotModelDisplay();
   
   
-	dlrffh_kdl* right;
-	KDL::Chain thumb; //,middle,ring,pinky;
-	right = new dlrffh_kdl(urdf_file.toStdString());
+	KDL::Tree tree;
+	bool res;
+	if (!kdl_format_io::treeFromUrdfFile(urdf_file.toStdString(),tree))
+	{
+		std::cout << "Problem loading URDF file..." << urdf_file.toStdString() << std::endl;
+	}
 	
 	std::map< std::string, double > q_in;
-	KDLTreeViz treeViz(right->getTree(),manager_->getFrameManager()->getTFClientPtr());
+	KDLTreeViz treeViz(tree,manager_->getFrameManager()->getTFClientPtr());
 
 	treeViz.setInitialVisualization();
-
-// 	Collection of strings usable for right DLR HIT2 hand
-	q_in.insert(std::pair<std::string,double>("right_index_abd_link",10*DEG2RAD));
-	q_in.insert(std::pair<std::string,double>("right_index_distal_link",0));
-	q_in.insert(std::pair<std::string,double>("right_index_medial_link",0));
-	q_in.insert(std::pair<std::string,double>("right_index_proximal_link",0));
-	q_in.insert(std::pair<std::string,double>("right_middle_abd_link",10*DEG2RAD));
-	q_in.insert(std::pair<std::string,double>("right_middle_distal_link",0));
-	q_in.insert(std::pair<std::string,double>("right_middle_medial_link",0));
-	q_in.insert(std::pair<std::string,double>("right_middle_proximal_link",0));
-	q_in.insert(std::pair<std::string,double>("right_palm_link",0));
-	q_in.insert(std::pair<std::string,double>("right_pinky_abd_link",10*DEG2RAD));
-	q_in.insert(std::pair<std::string,double>("right_pinky_distal_link",0));
-	q_in.insert(std::pair<std::string,double>("right_pinky_medial_link",0));
-	q_in.insert(std::pair<std::string,double>("right_pinky_proximal_link",0));
-	q_in.insert(std::pair<std::string,double>("right_ring_abd_link",10*DEG2RAD));
-	q_in.insert(std::pair<std::string,double>("right_ring_distal_link",0));
-	q_in.insert(std::pair<std::string,double>("right_ring_medial_link",0));
-	q_in.insert(std::pair<std::string,double>("right_ring_proximal_link",0));
-	q_in.insert(std::pair<std::string,double>("right_thumb_abd_link",10*DEG2RAD));
-	q_in.insert(std::pair<std::string,double>("right_thumb_distal_link",0));
-	q_in.insert(std::pair<std::string,double>("right_thumb_medial_link",0));
-	q_in.insert(std::pair<std::string,double>("right_thumb_proximal_link",0));
-
-	treeViz.setPose(q_in);
+	
+// // 	Collection of strings usable for right DLR HIT2 hand
+// 	q_in.insert(std::pair<std::string,double>("right_index_abd_link",10*DEG2RAD));
+// 	q_in.insert(std::pair<std::string,double>("right_index_distal_link",0));
+// 	q_in.insert(std::pair<std::string,double>("right_index_medial_link",0));
+// 	q_in.insert(std::pair<std::string,double>("right_index_proximal_link",0));
+// 	q_in.insert(std::pair<std::string,double>("right_middle_abd_link",10*DEG2RAD));
+// 	q_in.insert(std::pair<std::string,double>("right_middle_distal_link",0));
+// 	q_in.insert(std::pair<std::string,double>("right_middle_medial_link",0));
+// 	q_in.insert(std::pair<std::string,double>("right_middle_proximal_link",0));
+// 	q_in.insert(std::pair<std::string,double>("right_palm_link",0));
+// 	q_in.insert(std::pair<std::string,double>("right_pinky_abd_link",10*DEG2RAD));
+// 	q_in.insert(std::pair<std::string,double>("right_pinky_distal_link",0));
+// 	q_in.insert(std::pair<std::string,double>("right_pinky_medial_link",0));
+// 	q_in.insert(std::pair<std::string,double>("right_pinky_proximal_link",0));
+// 	q_in.insert(std::pair<std::string,double>("right_ring_abd_link",10*DEG2RAD));
+// 	q_in.insert(std::pair<std::string,double>("right_ring_distal_link",0));
+// 	q_in.insert(std::pair<std::string,double>("right_ring_medial_link",0));
+// 	q_in.insert(std::pair<std::string,double>("right_ring_proximal_link",0));
+// 	q_in.insert(std::pair<std::string,double>("right_thumb_abd_link",10*DEG2RAD));
+// 	q_in.insert(std::pair<std::string,double>("right_thumb_distal_link",0));
+// 	q_in.insert(std::pair<std::string,double>("right_thumb_medial_link",0));
+// 	q_in.insert(std::pair<std::string,double>("right_thumb_proximal_link",0));
+// 
+// 	treeViz.setPose(q_in);
 	
 	robot_ = manager_->createDisplay(robot,"urdf robot",true);
 	ROS_ASSERT( robot_ != NULL );
 	
-	//robot_->subProp("Robot Description")->setValue("/opt/ros/hydro/share/urdf_tutorial/05-visual.urdf");
-	//robot_->subProp("Robot Description")->setValue("/home/mirko/projects/walkman/rivz/rviz/src/myviz/pi_robot.urdf");
 	robot_->subProp("Robot Description")->setValue(urdf_file);
 
 }

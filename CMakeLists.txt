@@ -134,6 +134,8 @@ add_definitions(-DQT_NO_KEYWORDS)
 
 add_subdirectory(src)
 
+add_subdirectory(examples)
+
 # install(DIRECTORY ogre_media
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 # )

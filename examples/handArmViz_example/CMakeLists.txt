@@ -34,33 +34,32 @@ endif(NOT orocos_kdl_FOUND)
 add_definitions(-DQT_NO_KEYWORDS)
 #include_directories("../rviz/")
 include_directories("/opt/ros/hydro/include")
+include_directories("include/")
 
 ## Here we specify which header files need to be run through "moc",
 ## Qt's meta-object compiler.
 qt4_wrap_cpp(MOC_FILES
-  myviz.h
-  ../rviz/default_plugin/grid_display.h
+  include/handArmViz.h
+  ../../src/rviz/default_plugin/grid_display.h
 )
 
 ## Here we specify the list of source files, including the output of
 ## the previous command which is stored in ``${MOC_FILES}``.
 set(SOURCE_FILES
-  myviz.cpp
-  main.cpp
-  ../rviz/default_plugin/grid_display.cpp
+  src/handArmViz.cpp
+  src/main.cpp
+  ../../src/rviz/default_plugin/grid_display.cpp
   ${MOC_FILES}
-  dlr_finger.cpp
-  dlrffh_kdl.cpp
-  ../KDLTreeViz/KDLTreeViz.cpp
+  ../../tools/KDLTreeViz/KDLTreeViz.cpp
 )
 
 ## Add the "myviz" executable and specify the list of source files we
 ## collected above in ``${SOURCE_FILES}``.
-add_executable(myviz ${SOURCE_FILES})
+add_executable(handArmViz ${SOURCE_FILES})
 
 
 ## Link the myviz executable with whatever Qt libraries have been defined by
 ## the ``find_package(Qt4 ...)`` line above, and with whatever libraries
 ## catkin has included.
-target_link_libraries(myviz ${QT_LIBRARIES} default_plugin  tinyxml ${urdfdom_LIBRARIES} urdf resource_retriever ${kdl_format_io_LIBRARIES} ${orocos_kdl_LIBRARIES})
+target_link_libraries(handArmViz ${QT_LIBRARIES} default_plugin  tinyxml ${urdfdom_LIBRARIES} urdf resource_retriever ${kdl_format_io_LIBRARIES} ${orocos_kdl_LIBRARIES})
 ## END_TUTORIAL

@@ -39,6 +39,4 @@ add_library(KDLTreeViz ${SOURCE_FILES})
 ## the ``find_package(Qt4 ...)`` line above, and with whatever libraries
 ## catkin has included.
 target_link_libraries(KDLTreeViz tinyxml ${urdfdom_LIBRARIES} urdf ${orocos_kdl_LIBRARIES})
-# target_link_libraries(myviz ${QT_LIBRARIES} default_plugin  tinyxml ${urdfdom_LIBRARIES} urdf resource_retriever)
-## END_TUTORIAL
 

@@ -46,6 +46,11 @@ add_library(${PROJECT_NAME}
 # add_dependencies(${PROJECT_NAME} tf2_msgs_gencpp)
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
 
+# IMPORTANT: Add the tf2_ros library to the "export-set"
+install(TARGETS ${PROJECT_NAME}
+  EXPORT AvizTargets
+  ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib)
+  
 # buffer_server executable
 # add_executable(${PROJECT_NAME}_buffer_server src/buffer_server_main.cpp)
 # add_dependencies(${PROJECT_NAME}_buffer_server tf2_msgs_gencpp)

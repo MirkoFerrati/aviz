@@ -255,3 +255,8 @@ set_target_properties(executable
 # install(DIRECTORY ./
 #   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 #   FILES_MATCHING PATTERN "*.h")
+
+# IMPORTANT: Add the aviz library to the "export-set"
+install(TARGETS aviz
+  EXPORT AvizTargets
+  ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib)

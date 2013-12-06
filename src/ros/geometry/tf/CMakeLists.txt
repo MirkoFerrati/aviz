@@ -29,6 +29,11 @@ add_library(${PROJECT_NAME} src/tf.cpp src/transform_listener.cpp src/cache.cpp 
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES} tf2 tf2_ros time)
 # add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_gencpp)
 
+# IMPORTANT: Add the tf library to the "export-set"
+install(TARGETS ${PROJECT_NAME}
+  EXPORT AvizTargets
+  ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib)
+
 # Debug
 # add_executable(tf_empty_listener src/empty_listener.cpp)
 # target_link_libraries(tf_empty_listener ${PROJECT_NAME})

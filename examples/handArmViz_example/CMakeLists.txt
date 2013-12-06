@@ -1,7 +1,7 @@
 
 
 cmake_minimum_required(VERSION 2.8.3)
-project(librviz_tutorial)
+project(libaviz_tutorial)
 
 ## This plugin includes Qt widgets, so we must include Qt like so:
 find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
@@ -63,3 +63,15 @@ add_executable(handArmViz ${SOURCE_FILES})
 ## catkin has included.
 target_link_libraries(handArmViz ${QT_LIBRARIES} default_plugin  tinyxml ${urdfdom_LIBRARIES} urdf resource_retriever ${kdl_format_io_LIBRARIES} ${orocos_kdl_LIBRARIES})
 ## END_TUTORIAL
+
+# IMPORTANT: Add the handArmViz executable to the "export-set"
+install(TARGETS handArmViz
+  EXPORT AvizTargets
+  RUNTIME DESTINATION "${INSTALL_BIN_DIR}" COMPONENT bin)
+
+  # ${CMAKE_CURRENT_BINARY_DIR}/file3.h
+#   EXPORT AvizTargets
+# INSTALL(FILES  ../../src/rviz/default_plugin/grid_display.h 
+#   RUNTIME DESTINATION "${INSTALL_INCLUDE_DIR}" COMPONENT include)
+INSTALL(FILES  ../../src/rviz/default_plugin/grid_display.h 
+  DESTINATION "${INSTALL_INCLUDE_DIR}" COMPONENT include)

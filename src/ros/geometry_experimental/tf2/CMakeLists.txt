@@ -21,6 +21,11 @@ add_library(tf2 src/cache.cpp src/buffer_core.cpp src/static_cache.cpp)
 target_link_libraries(tf2 ${Boost_LIBRARIES} ${catkin_LIBRARIES} ${console_bridge_LIBRARIES})
 # add_dependencies(tf2 tf2_msgs_gencpp)
 
+# IMPORTANT: Add the tf2 library to the "export-set"
+install(TARGETS tf2
+  EXPORT AvizTargets
+  ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib)
+  
 # install(TARGETS tf2
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}

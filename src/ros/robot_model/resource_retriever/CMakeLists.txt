@@ -31,3 +31,8 @@ target_link_libraries(${PROJECT_NAME} ${CURL_LIBRARIES} )
 # 
 # install(DIRECTORY include/${PROJECT_NAME}/
 #   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
+
+# IMPORTANT: Add the resource_retriever library to the "export-set"
+install(TARGETS ${PROJECT_NAME}
+  EXPORT AvizTargets
+  ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib)

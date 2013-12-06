@@ -1,0 +1,16 @@
+# - Config file for the Aviz package
+# It defines the following variables
+#  AVIZ_INCLUDE_DIRS - include directories for Aviz
+#  AVIZ_LIBRARIES    - libraries to link against
+#  AVIZ_EXECUTABLE   - the bar executable
+
+# Compute paths
+get_filename_component(AVIZ_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+set(AVIZ_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
+
+# Our library dependencies (contains definitions for IMPORTED targets)
+include("${AVIZ_CMAKE_DIR}/AvizTargets.cmake")
+
+# These are IMPORTED targets created by AvizTargets.cmake
+set(AVIZ_LIBRARIES aviz)
+set(AVIZ_EXECUTABLE handArmViz)

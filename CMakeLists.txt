@@ -125,9 +125,10 @@ include_directories(${EIGEN3_INCLUDE_DIR})
 message (STATUS "eigen include dir: " ${EIGEN3_INCLUDE_DIR})
 
 include_directories(src ${catkin_INCLUDE_DIRS})
-include_directories("/opt/ros/hydro/include")
+# include_directories("/opt/ros/hydro/include")
 include_directories(src/ros/geometry)
 link_directories(${OGRE_LIBRARY_DIRS})
+include_directories(other_ros_include)
 
 include(${QT_USE_FILE})
 add_definitions(-DQT_NO_KEYWORDS)
@@ -246,9 +247,12 @@ install(EXPORT AvizTargets DESTINATION
 install(DIRECTORY src tools DESTINATION ${INSTALL_INCLUDE_DIR} COMPONENT include
 	FILES_MATCHING  REGEX "((src/ros/|src/rviz|tools/).*[.](h|hpp)$)"
 )
-  
 # ((src/ros/|src/rviz|tools/).*([.](h|hpp)|_display[.]c(c|pp))$)
 # this would also install *_display.cpp files; anyway, these are not needed once the library is compiled
+
+install(DIRECTORY other_ros_include/ DESTINATION ${INSTALL_INCLUDE_DIR} COMPONENT include
+	FILES_MATCHING  REGEX "([.](h|hpp)$)"
+) 
 
 # install(DIRECTORY dirs... DESTINATION <dir>
 #           [FILE_PERMISSIONS permissions...]
@@ -258,4 +262,3 @@ install(DIRECTORY src tools DESTINATION ${INSTALL_INCLUDE_DIR} COMPONENT include
 #           [COMPONENT <component>] [FILES_MATCHING]
 #           [[PATTERN <pattern> | REGEX <regex>]
 #            [EXCLUDE] [PERMISSIONS permissions...]] [...])
-  

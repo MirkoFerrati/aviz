@@ -56,13 +56,13 @@ set(SOURCE_FILES
 
 ## Add the "myviz" executable and specify the list of source files we
 ## collected above in ``${SOURCE_FILES}``.
-add_executable(handArmViz_prova_cmake ${SOURCE_FILES})
+add_executable(handArmViz ${SOURCE_FILES})
 
 
 ## Link the myviz executable with whatever Qt libraries have been defined by
 ## the ``find_package(Qt4 ...)`` line above, and with whatever libraries
 ## catkin has included.
-target_link_libraries(handArmViz_prova_cmake ${QT_LIBRARIES} tinyxml ${urdfdom_LIBRARIES} urdf resource_retriever ${kdl_format_io_LIBRARIES} ${orocos_kdl_LIBRARIES} default_plugin KDLTreeViz)
+target_link_libraries(handArmViz ${QT_LIBRARIES} tinyxml ${urdfdom_LIBRARIES} urdf resource_retriever ${kdl_format_io_LIBRARIES} ${orocos_kdl_LIBRARIES} default_plugin KDLTreeViz)
 ## END_TUTORIAL
 
 # # IMPORTANT: Add the handArmViz executable to the "export-set"

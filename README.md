@@ -45,3 +45,42 @@ If you take a look at myviz.cpp, you will see how to send frame transformations 
 without using ROS nodes and so on.
 
 
+installing the library
+---------------------
+Once all requirements are fullfilled (i.e., all ROS include not provided directly with the package are in your include path), you can use the following command to install the library [LINUX]:
+
+mkdir build
+cd build
+cmake .. [*NOTE1]
+make
+[sudo] make install
+
+Sudo rights are needed only if you decide to install this library in a place where you don't have writing rights.
+This will install in the system some static libraries and [maybe too many] headers for you to include to write code with the library itself.
+*NOTE1:
+To change where the library gets installed, do not use [DESTDIR=${mydir}] in the "make install" command, as this is not yet supported; instead,
+set the INSTALL_BASE_DIR variable in the cmake configuration to ${mydir} (without last "/", which is added by default).
+
+a full working example
+----------------------
+Once the library is installed, you can build the example "handArmViz" from the example folder [LINUX]:
+
+cd ../examples
+mkdir build
+cd build
+[ccmake ..  -- this is only needed if you set INSTALL_BASE_DIR to install the library in a folder which is not SYSTEM:
+        you will need to set Aviz_DIR to ${mydir}/lib/CMake/aviz in order to find the AvizConfig.cmake file]
+cmake ..
+make
+
+cp ../config.yaml ./config.yaml
+[edit the file config.yaml just copied inside build such that path to unipi_robot.urdf, rviz folder (needed for the icons), 
+and robot_description directories are corresponding to global path in your computer]
+[*NOTE2]
+./handArmViz
+
+
+*NOTE2:
+if you are using a virtual machine to run this, you will need to run the following command before running the executable
+"export LIBGL_ALWAYS_SOFTWARE=1"
+This is to obtain 3D graphics acceleration from OpenGL not using hardware (the program - or even the Virtual Machine - would crash otherwise).

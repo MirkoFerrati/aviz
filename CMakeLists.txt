@@ -140,8 +140,8 @@ add_definitions(-DQT_NO_KEYWORDS)
 # include_directories(/usr/include/gdk-pixbuf-2.0)
 
 add_subdirectory(src)
-
-add_subdirectory(examples)
+add_subdirectory(tools)
+# add_subdirectory(examples)
 
 # install(DIRECTORY ogre_media
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
@@ -160,14 +160,15 @@ add_subdirectory(examples)
 # )
 
 ###################################################################
-## Add possibility to install the library (at now, just locally) ##
+## Add possibility to install the library (set INSTALL_BASE_DIR) ##
 ###################################################################
-## remove ${PROJECT_BINARY_DIR}/ from the following *INSTALL_*_DIR
+# set(INSTALL_BASE_DIR ${PROJECT_BINARY_DIR})
+set(INSTALL_BASE_DIR "" CACHE PATH "Base installation directory") #default install in root
 
 # Offer the user the choice of overriding the installation directories
-set(INSTALL_LIB_DIR ${PROJECT_BINARY_DIR}/lib CACHE PATH "Installation directory for libraries")
-set(INSTALL_BIN_DIR ${PROJECT_BINARY_DIR}/bin CACHE PATH "Installation directory for executables")
-set(INSTALL_INCLUDE_DIR ${PROJECT_BINARY_DIR}/include CACHE PATH
+set(INSTALL_LIB_DIR ${INSTALL_BASE_DIR}/lib/aviz CACHE INTERNAL "Installation directory for libraries")
+set(INSTALL_BIN_DIR ${INSTALL_BASE_DIR}/bin/aviz CACHE INTERNAL "Installation directory for executables")
+set(INSTALL_INCLUDE_DIR ${INSTALL_BASE_DIR}/include/aviz CACHE INTERNAL
   "Installation directory for header files")
 # Where do I install cmake packages?
 if(WIN32 AND NOT CYGWIN)
@@ -175,16 +176,16 @@ if(WIN32 AND NOT CYGWIN)
 else()
   set(DEF_INSTALL_CMAKE_DIR lib/CMake/aviz)
 endif()
-set(INSTALL_CMAKE_DIR ${PROJECT_BINARY_DIR}/${DEF_INSTALL_CMAKE_DIR} CACHE PATH
+set(INSTALL_CMAKE_DIR ${INSTALL_BASE_DIR}/${DEF_INSTALL_CMAKE_DIR} CACHE INTERNAL
   "Installation directory for CMake files")
 
-# Make relative paths absolute (needed later on)
-foreach(p LIB BIN INCLUDE CMAKE)
-  set(var INSTALL_${p}_DIR)
-  if(NOT IS_ABSOLUTE "${${var}}")
-    set(${var} "${CMAKE_INSTALL_PREFIX}/${${var}}")
-  endif()
-endforeach()
+# # Make relative paths absolute (needed later on)
+# foreach(p LIB BIN INCLUDE CMAKE)
+#   set(var INSTALL_${p}_DIR)
+#   if(NOT IS_ABSOLUTE "${${var}}")
+#     set(${var} "${CMAKE_INSTALL_PREFIX}/${${var}}")
+#   endif()
+# endforeach()
 
 # set up include-directories
 include_directories(
@@ -198,23 +199,30 @@ include_directories(
 # The interesting stuff goes here
 # ===============================
 
-# Add all targets to the build-tree export set
-export(TARGETS handArmViz
-  FILE "${PROJECT_BINARY_DIR}/AvizTargets.cmake")
+## No longer export the example - build it apart
+# # Add all targets to the build-tree export set
+# export(TARGETS handArmViz
+#   FILE "${PROJECT_BINARY_DIR}/AvizTargets.cmake")
 
 # Export the package for use from the build-tree
 # (this registers the build-tree with a global CMake-registry)
 export(PACKAGE aviz)
 
-# Create the AvizConfig.cmake and AvizConfigVersion files
+# if wanting to use relative path use the variable REL_INCLUDE_DIR,
+# otherwise, use the variable INSTALL_INCLUDE_DIR
 file(RELATIVE_PATH REL_INCLUDE_DIR "${INSTALL_CMAKE_DIR}"
    "${INSTALL_INCLUDE_DIR}")
+
+# Create the AvizConfig.cmake and AvizConfigVersion files
 # ... for the build tree
 set(CONF_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}" "${PROJECT_BINARY_DIR}")
 configure_file(AvizConfig.cmake.in
   "${PROJECT_BINARY_DIR}/AvizConfig.cmake" @ONLY)
 # ... for the install tree
+## -- relative path --
 set(CONF_INCLUDE_DIRS "\${AVIZ_CMAKE_DIR}/${REL_INCLUDE_DIR}")
+## -- absolute path --
+# set(CONF_INCLUDE_DIRS "${INSTALL_INCLUDE_DIR}")
 configure_file(AvizConfig.cmake.in
   "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/AvizConfig.cmake" @ONLY)
 # ... for both
@@ -230,3 +238,24 @@ install(FILES
 # Install the export set for use with the install-tree
 install(EXPORT AvizTargets DESTINATION
   "${INSTALL_CMAKE_DIR}" COMPONENT dev)
+
+# This should be done inside each specific folder CMakeLists but, as the project is quite big and confused by now,
+# is done here just in order to have it working; improvements will be well-accepted
+# At now,  more than needed is installed
+## install include files in the appropriate directory
+install(DIRECTORY src tools DESTINATION ${INSTALL_INCLUDE_DIR} COMPONENT include
+	FILES_MATCHING  REGEX "((src/ros/|src/rviz|tools/).*[.](h|hpp)$)"
+)
+  
+# ((src/ros/|src/rviz|tools/).*([.](h|hpp)|_display[.]c(c|pp))$)
+# this would also install *_display.cpp files; anyway, these are not needed once the library is compiled
+
+# install(DIRECTORY dirs... DESTINATION <dir>
+#           [FILE_PERMISSIONS permissions...]
+#           [DIRECTORY_PERMISSIONS permissions...]
+#           [USE_SOURCE_PERMISSIONS]
+#           [CONFIGURATIONS [Debug|Release|...]]
+#           [COMPONENT <component>] [FILES_MATCHING]
+#           [[PATTERN <pattern> | REGEX <regex>]
+#            [EXCLUDE] [PERMISSIONS permissions...]] [...])
+  

@@ -109,7 +109,13 @@ set(SOURCE_FILES
 )
 
 add_library(default_plugin ${SOURCE_FILES})
-target_link_libraries(default_plugin package ${PROJECT_NAME} ${catkin_LIBRARIES} ${QT_LIBRARIES} ${OGRE_LIBRARIES} ${Boost_LIBRARIES} ${urdfdom_LIBRARIES} resource_retriever)
+target_link_libraries(default_plugin package ${PROJECT_NAME} ${QT_LIBRARIES} ${OGRE_LIBRARIES} ${Boost_LIBRARIES} ${urdfdom_LIBRARIES} resource_retriever)
+# target_link_libraries(default_plugin package ${PROJECT_NAME} ${catkin_LIBRARIES} ${QT_LIBRARIES} ${OGRE_LIBRARIES} ${Boost_LIBRARIES} ${urdfdom_LIBRARIES} resource_retriever)
+
+# IMPORTANT: Add the default_plugin library to the "export-set"
+install(TARGETS default_plugin
+  EXPORT AvizTargets
+  ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib)
 
 # install(TARGETS default_plugin
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}

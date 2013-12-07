@@ -40,11 +40,11 @@
 #include <rviz/frame_manager.h>
 #include <rviz/yaml_config_reader.h>
 #include "handArmViz.h"
-#include <tf/transform_datatypes.h>
-#include <../package.h>
+#include "ros/geometry/tf/include/tf/transform_datatypes.h"
+#include "ros/package.h"
 
 #include <kdl_format_io/urdf_import.hpp>
-#include "../tools/KDLTreeViz/KDLTreeViz.h"
+#include "tools/KDLTreeViz/KDLTreeViz.h"
 
 // BEGIN_TUTORIAL
 // Constructor for MyViz.  This does most of the work of the class.

@@ -198,7 +198,7 @@ add_library( ${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
   ${Boost_LIBRARIES}
-  ${catkin_LIBRARIES}
+#   ${catkin_LIBRARIES}
   ${OGRE_LIBRARIES}
   ${OPENGL_LIBRARIES}
   ${QT_LIBRARIES}
@@ -242,11 +242,11 @@ else()
 endif()
 
 ########### The rviz executable ###########
-add_executable(executable main.cpp)
-
-target_link_libraries(executable ${PROJECT_NAME} ${QT_LIBRARIES} ${OGRE_LIBRARIES})
-set_target_properties(executable
-                      PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
+# add_executable(executable main.cpp)
+# 
+# target_link_libraries(executable ${PROJECT_NAME} ${QT_LIBRARIES} ${OGRE_LIBRARIES})
+# set_target_properties(executable
+#                       PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
 
 # install(TARGETS executable ${PROJECT_NAME}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

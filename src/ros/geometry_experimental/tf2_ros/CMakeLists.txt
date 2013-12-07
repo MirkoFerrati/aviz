@@ -44,7 +44,8 @@ add_library(${PROJECT_NAME}
   src/static_transform_broadcaster.cpp
 )
 # add_dependencies(${PROJECT_NAME} tf2_msgs_gencpp)
-target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
+target_link_libraries(${PROJECT_NAME})
+# target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
 
 # IMPORTANT: Add the tf2_ros library to the "export-set"
 install(TARGETS ${PROJECT_NAME}

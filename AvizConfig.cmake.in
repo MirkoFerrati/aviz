@@ -13,4 +13,4 @@ include("${AVIZ_CMAKE_DIR}/AvizTargets.cmake")
 
 # These are IMPORTED targets created by AvizTargets.cmake
 set(AVIZ_LIBRARIES aviz)
-set(AVIZ_EXECUTABLE handArmViz)
+#set(AVIZ_EXECUTABLE handArmViz)

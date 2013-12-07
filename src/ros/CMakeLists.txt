@@ -11,13 +11,7 @@ add_library(package package.cpp)
 add_library(time time.cpp)
 
 
-# IMPORTANT: Add the time library to the "export-set"
-install(TARGETS time
+# IMPORTANT: Add the time and package library to the "export-set"
+install(TARGETS time package
   EXPORT AvizTargets
   ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib)
-  
-# IMPORTANT: Add the package library to the "export-set"
-install(TARGETS package
-  EXPORT AvizTargets
-  ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib)
-  

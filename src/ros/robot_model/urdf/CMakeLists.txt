@@ -38,3 +38,8 @@ target_link_libraries(${PROJECT_NAME} ${TinyXML_LIBRARIES} ${catkin_LIBRARIES} $
 # 
 # install(DIRECTORY include/${PROJECT_NAME}/
 #   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
+
+# IMPORTANT: Add the urdf library to the "export-set"
+install(TARGETS urdf
+  EXPORT AvizTargets
+  ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib)

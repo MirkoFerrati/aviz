@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(KDLTreeViz)
 
-include_directories("/opt/ros/hydro/include")
+# include_directories("/opt/ros/hydro/include")
 
 ## Here we specify the list of source files
 set(SOURCE_FILES

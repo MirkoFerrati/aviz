@@ -1,7 +1,7 @@
 add_subdirectory(default_plugin)
 
 include_directories(.)
-include_directories("/opt/ros/hydro/include")
+# include_directories("/opt/ros/hydro/include")
 
 # Build the version number and other build-time constants into the
 # source for access at run-time.

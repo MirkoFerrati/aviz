@@ -1,6 +1,6 @@
 include_directories(../geometry_experimental/tf2/include)
 include_directories(../geometry_experimental/tf2_ros/include)
-include_directories("/opt/ros/hydro/include")
+# include_directories("/opt/ros/hydro/include")
 
 add_subdirectory(eigen_conversions)
 include_directories(eigen_conversions)

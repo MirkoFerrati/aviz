@@ -1,5 +1,5 @@
 include_directories(.)
-include_directories("/opt/ros/hydro/include")
+# include_directories("/opt/ros/hydro/include")
 qt4_wrap_cpp(MOC_FILES
   axes_display.h
 #  camera_display.h

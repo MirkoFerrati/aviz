@@ -1,4 +1,4 @@
-include_directories("/opt/ros/hydro/include")
+# include_directories("/opt/ros/hydro/include")
 add_subdirectory(urdf)
 add_subdirectory(urdf_parser_plugin)
 add_subdirectory(resource_retriever)

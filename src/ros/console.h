@@ -1,5 +1,5 @@
- #include "/opt/ros/hydro/include/ros/console.h"
-
+ // #include "/opt/ros/hydro/include/ros/console.h"
+#include "../other_ros_include/ros/console.h"
 
 #undef ROS_INFO
 #define ROS_INFO(...) printf(__VA_ARGS__); printf("\n")

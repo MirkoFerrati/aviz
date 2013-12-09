@@ -1,5 +1,6 @@
 
-#include </opt/ros/hydro/include/ros/assert.h>
+// #include </opt/ros/hydro/include/ros/assert.h>
+#include "../other_ros_include/ros/assert.h"
 
 #include <assert.h>
 

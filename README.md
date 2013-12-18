@@ -13,6 +13,11 @@ No need to run any ros script or to have ros-master running.
 You will need a ROS-clean version of orocos-kdl, which can be found 
 here https://github.com/traversaro/orocos_kinematics_dynamics.
 
+You will also need the experimental version of kdl_codyco:
+https://github.com/traversaro/kdl_codyco/tree/experimental
+
+Run ./build_urdfdom in ./travis from this repo: https://github.com/traversaro/kdl_format_io and install it.
+
 By installing that version of orocos_kinematics_dynamics 
 you also get console_bridge, urdfdom and urdfdom_headers, which are required.
 
@@ -48,15 +53,16 @@ without using ROS nodes and so on.
 installing the library
 ---------------------
 Once all requirements are fullfilled (i.e., all ROS include not provided directly with the package are in your include path), you can use the following command to install the library [LINUX]:
-
+```
 mkdir build
 cd build
 cmake .. [*NOTE1]
 make
 [sudo] make install
-
+```
 Sudo rights are needed only if you decide to install this library in a place where you don't have writing rights.
 This will install in the system some static libraries and [maybe too many] headers for you to include to write code with the library itself.
+
 *NOTE1:
 To change where the library gets installed, do not use [DESTDIR=${mydir}] in the "make install" command, as this is not yet supported; instead,
 set the INSTALL_BASE_DIR variable in the cmake configuration to ${mydir} (without last "/", which is added by default).
@@ -64,7 +70,7 @@ set the INSTALL_BASE_DIR variable in the cmake configuration to ${mydir} (withou
 a full working example
 ----------------------
 Once the library is installed, you can build the example "handArmViz" from the example folder [LINUX]:
-
+```
 cd ../examples
 mkdir build
 cd build
@@ -78,7 +84,7 @@ cp ../config.yaml ./config.yaml
 and robot_description directories are corresponding to global path in your computer]
 [*NOTE2]
 ./handArmViz
-
+```
 
 *NOTE2:
 if you are using a virtual machine to run this, you will need to run the following command before running the executable

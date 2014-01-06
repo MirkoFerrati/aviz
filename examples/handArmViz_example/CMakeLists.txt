@@ -13,6 +13,8 @@ find_package(Aviz)
 find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
 include(${QT_USE_FILE})
 
+include_directories(/usr/include/eigen3)
+
 find_package(orocos_kdl REQUIRED)
 find_package(kdl_format_io REQUIRED)
 #support also for the old version of kdl cmake package
@@ -34,14 +36,14 @@ add_definitions(-DQT_NO_KEYWORDS)
 
 include_directories("${AVIZ_INCLUDE_DIRS}")
 include_directories("${AVIZ_INCLUDE_DIRS}/src")
-# include_directories("/opt/ros/hydro/include")
-include_directories("include/")
+include_directories("${AVIZ_INCLUDE_DIRS}/other_ros_include")
+
+include_directories(include/)
 
 ## Here we specify which header files need to be run through "moc",
 ## Qt's meta-object compiler.
 qt4_wrap_cpp(MOC_FILES
   include/handArmViz.h
-#  ${AVIZ_INCLUDE_DIRS}/src/rviz/default_plugin/grid_display.h
 )
 
 ## Here we specify the list of source files, including the output of
@@ -49,20 +51,24 @@ qt4_wrap_cpp(MOC_FILES
 set(SOURCE_FILES
   src/handArmViz.cpp
   src/main.cpp
-#  ${AVIZ_INCLUDE_DIRS}/src/rviz/default_plugin/grid_display.cpp
   ${MOC_FILES}
-#   ../../tools/KDLTreeViz/KDLTreeViz.cpp
 )
 
 ## Add the "myviz" executable and specify the list of source files we
 ## collected above in ``${SOURCE_FILES}``.
-add_executable(handArmViz ${SOURCE_FILES})
+add_executable(handArmViz2 ${SOURCE_FILES})
+
+# install(TARGETS handArmViz
+#   EXPORT AvizTargets
+#   RUNTIME DESTINATION ${INSTALL_BIN_DIR}
+# )
 
 
 ## Link the myviz executable with whatever Qt libraries have been defined by
 ## the ``find_package(Qt4 ...)`` line above, and with whatever libraries
 ## catkin has included.
-target_link_libraries(handArmViz ${QT_LIBRARIES} tinyxml ${urdfdom_LIBRARIES} urdf resource_retriever ${kdl_format_io_LIBRARIES} ${orocos_kdl_LIBRARIES} default_plugin KDLTreeViz)
+target_link_libraries(handArmViz2 ${QT_LIBRARIES} JointPositionCtrl tinyxml ${urdfdom_LIBRARIES} urdf resource_retriever ${kdl_format_io_LIBRARIES} ${orocos_kdl_LIBRARIES} default_plugin KDLTreeViz)
+  # aviz tf tf2 tf2_ros time package)
 ## END_TUTORIAL
 
 # # IMPORTANT: Add the handArmViz executable to the "export-set"

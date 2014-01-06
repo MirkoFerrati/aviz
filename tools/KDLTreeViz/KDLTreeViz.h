@@ -1,3 +1,6 @@
+#ifndef KDLTREEVIZ_H
+#define KDLTREEVIZ_H
+
 #include <kdl/tree.hpp>
 #include <boost/shared_ptr.hpp>
 #include <tf/tf.h>
@@ -8,7 +11,7 @@ private:
 	/**
 	 * The tree representing the robot kinematics
 	 */
-	const KDL::Tree& tree_;
+	const KDL::Tree tree_;
 	
 	/**
 	 * A vector of pointers to
@@ -36,3 +39,5 @@ public:
 	void setInitialVisualization();
 	
 };
+
+#endif //KDLTREEVIZ_H

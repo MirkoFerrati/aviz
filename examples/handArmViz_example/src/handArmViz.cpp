@@ -31,6 +31,8 @@
 #include <QLabel>
 #include <QGridLayout>
 #include <QVBoxLayout>
+#include <QTimer>
+#include <iostream>
 
 #include "rviz/visualization_manager.h"
 #include "rviz/render_panel.h"
@@ -44,11 +46,10 @@
 #include "ros/package.h"
 
 #include <kdl_format_io/urdf_import.hpp>
-#include "tools/KDLTreeViz/KDLTreeViz.h"
 
 // BEGIN_TUTORIAL
-// Constructor for MyViz.  This does most of the work of the class.
-MyViz::MyViz(std::string config_file , QWidget* parent)
+// Constructor for handArmViz.  This does most of the work of the class.
+handArmViz::handArmViz(std::string config_file , QWidget* parent)
   : QWidget( parent )
 {
 	int i = 0;
@@ -136,7 +137,7 @@ MyViz::MyViz(std::string config_file , QWidget* parent)
   main_layout->addLayout( controls_layout );
   main_layout->addWidget( render_panel_ );
 
-  // Set the top-level layout for this MyViz widget.
+  // Set the top-level layout for this handArmViz widget.
   setLayout( main_layout );
 
   // Make signal/slot connections.
@@ -178,9 +179,17 @@ MyViz::MyViz(std::string config_file , QWidget* parent)
 	}
 	
 	std::map< std::string, double > q_in;
-	KDLTreeViz treeViz(tree,manager_->getFrameManager()->getTFClientPtr());
+	this->treeViz = new KDLTreeViz(tree,manager_->getFrameManager()->getTFClientPtr());
 
-	treeViz.setInitialVisualization();
+	treeViz->setInitialVisualization();
+	
+	this->jointPosCtrl = new JointPositionCtrl(tree,parent);
+	this->jointPosCtrl->show();
+	
+	// Make signal/slot connections.
+	QTimer *timerReadSlider = new QTimer(this);
+	connect( timerReadSlider, SIGNAL( timeout()), this, SLOT( drawTree()));
+	timerReadSlider->start(50);
 	
 // // 	Collection of strings usable for right DLR HIT2 hand
 // 	q_in.insert(std::pair<std::string,double>("right_index_abd_link",10*DEG2RAD));
@@ -215,7 +224,7 @@ MyViz::MyViz(std::string config_file , QWidget* parent)
 }
 
 // Destructor.
-MyViz::~MyViz()
+handArmViz::~handArmViz()
 {
   delete manager_;
 }
@@ -223,7 +232,7 @@ MyViz::~MyViz()
 // This function is a Qt slot connected to a QSlider's valueChanged()
 // signal.  It sets the line thickness of the grid by changing the
 // grid's "Line Width" property.
-void MyViz::setThickness( int thickness_percent )
+void handArmViz::setThickness( int thickness_percent )
 {
   if( grid_ != NULL )
   {
@@ -234,7 +243,7 @@ void MyViz::setThickness( int thickness_percent )
 // This function is a Qt slot connected to a QSlider's valueChanged()
 // signal.  It sets the cell size of the grid by changing the grid's
 // "Cell Size" Property.
-void MyViz::setCellSize( int cell_size_percent )
+void handArmViz::setCellSize( int cell_size_percent )
 {
   if( grid_ != NULL )
   {
@@ -242,3 +251,7 @@ void MyViz::setCellSize( int cell_size_percent )
   }
 }
 
+void handArmViz::drawTree()
+{
+	this->treeViz->setPose( this->jointPosCtrl->getJointValues() );
+}

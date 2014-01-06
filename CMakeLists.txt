@@ -250,7 +250,7 @@ install(DIRECTORY src tools DESTINATION ${INSTALL_INCLUDE_DIR} COMPONENT include
 # ((src/ros/|src/rviz|tools/).*([.](h|hpp)|_display[.]c(c|pp))$)
 # this would also install *_display.cpp files; anyway, these are not needed once the library is compiled
 
-install(DIRECTORY other_ros_include/ DESTINATION ${INSTALL_INCLUDE_DIR} COMPONENT include
+install(DIRECTORY other_ros_include DESTINATION ${INSTALL_INCLUDE_DIR} COMPONENT include
 	FILES_MATCHING  REGEX "([.](h|hpp)$)"
 ) 
 

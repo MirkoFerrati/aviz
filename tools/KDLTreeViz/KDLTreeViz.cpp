@@ -39,9 +39,9 @@ void KDLTreeViz::setPose(std::map< std::string, double > q_in)
 		t.setRotation(tf::Quaternion(x,y,z,w));
 		
 		this->tf_->setTransform(t, "default_authority");
-		
+// 		std::cout << "Transformation no problem!" << std::endl;
 	}
-	std::cout << std::endl;
+// 	std::cout << std::endl;
 }
 
 void KDLTreeViz::setInitialVisualization()

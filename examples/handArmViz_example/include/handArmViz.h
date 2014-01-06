@@ -26,10 +26,12 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef MYVIZ_H
-#define MYVIZ_H
+#ifndef HANDARMVIZ_H
+#define HANDARMVIZ_H
 
 #include <QWidget>
+#include "../tools/KDLTreeViz/KDLTreeViz.h"
+#include "../tools/JointPositionCtrl/JointPositionCtrl.h"
 
 namespace rviz
 {
@@ -39,23 +41,26 @@ class VisualizationManager;
 }
 
 // BEGIN_TUTORIAL
-// Class "MyViz" implements the top level widget for this example.
-class MyViz: public QWidget
+// Class "handArmViz" implements the top level widget for this example.
+class handArmViz: public QWidget
 {
 Q_OBJECT
 public:
-  MyViz(std::string config_path, QWidget* parent = 0 );
-  virtual ~MyViz();
+	handArmViz(std::string config_path, QWidget* parent = 0 );
+	virtual ~handArmViz();
 
 private Q_SLOTS:
-  void setThickness( int thickness_percent );
-  void setCellSize( int cell_size_percent );
+	void setThickness( int thickness_percent );
+	void setCellSize( int cell_size_percent );
+	void drawTree();
 
 private:
-  rviz::VisualizationManager* manager_;
-  rviz::RenderPanel* render_panel_;
-  rviz::Display* grid_;
-  rviz::Display* robot_;
+	rviz::VisualizationManager* manager_;
+	rviz::RenderPanel* render_panel_;
+	rviz::Display* grid_;
+	rviz::Display* robot_;
+	KDLTreeViz *treeViz;
+	JointPositionCtrl *jointPosCtrl;
 };
 // END_TUTORIAL
-#endif // MYVIZ_H
+#endif // HANDARMVIZ_H

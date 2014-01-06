@@ -31,7 +31,7 @@
 
 // The main() for this "myviz" example is very simple, it just
 // initializes ROS, creates a QApplication, creates the top-level
-// widget (of type "MyViz"), shows it, and runs the Qt event loop.
+// widget (of type "handArmViz"), shows it, and runs the Qt event loop.
 
 #include <QApplication>
 #include <ros/ros.h>
@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 
 	QApplication app( argc, argv );
 
-	MyViz* myviz = new MyViz("config.yaml");
+	handArmViz* myviz = new handArmViz("config.yaml");
 	myviz->show();
 
 	app.exec();

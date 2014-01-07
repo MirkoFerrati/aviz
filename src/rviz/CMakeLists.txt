@@ -210,6 +210,7 @@ target_link_libraries(${PROJECT_NAME}
   tf
   time
   package
+  default_plugin
 )
 
 if(APPLE)

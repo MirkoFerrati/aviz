@@ -119,6 +119,11 @@ public:
       topic_property_->setString( topic );
     }
 
+    void processMessageAPI(const typename MessageType::ConstPtr& msg)
+    {
+        processMessage(msg);
+    }
+    
 protected:
   virtual void updateTopic()
     {

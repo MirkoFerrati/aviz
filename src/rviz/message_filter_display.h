@@ -33,7 +33,7 @@
 #include <OGRE/OgreSceneNode.h>
 
 #ifndef Q_MOC_RUN
-#include <message_filters/subscriber.h>
+// #include <message_filters/subscriber.h>
 #include <tf/message_filter.h>
 #endif
 
@@ -155,7 +155,7 @@ protected:
 
   virtual void unsubscribe()
     {
-      sub_.unsubscribe();
+//       sub_.unsubscribe();
     }
 
   virtual void onEnable()
@@ -196,7 +196,7 @@ protected:
    * This is called by incomingMessage(). */
   virtual void processMessage( const typename MessageType::ConstPtr& msg ) = 0;
 
-  message_filters::Subscriber<MessageType> sub_;
+  //message_filters::Subscriber<MessageType> sub_;
   tf::MessageFilter<MessageType>* tf_filter_;
   uint32_t messages_received_;
 };

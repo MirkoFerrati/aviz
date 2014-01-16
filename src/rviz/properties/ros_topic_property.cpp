@@ -58,28 +58,28 @@ void RosTopicProperty::setMessageType( const QString& message_type )
 
 void RosTopicProperty::fillTopicList()
 {
-  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  clearOptions();
-
-  std::string std_message_type = message_type_.toStdString();
-
-  ros::master::V_TopicInfo topics;
-  ros::master::getTopics( topics );
-
-  // Loop through all published topics
-  ros::master::V_TopicInfo::iterator it;
-  for( it = topics.begin(); it != topics.end(); ++it )
-  {
-    const ros::master::TopicInfo& topic = *it;
-
-    // Only add topics whose type matches.
-    if( topic.datatype == std_message_type )
-    {
-      addOptionStd( topic.name );
-    }
-  }
-  sortOptions();
-  QApplication::restoreOverrideCursor();
+//   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+//   clearOptions();
+// 
+//   std::string std_message_type = message_type_.toStdString();
+// 
+//   ros::master::V_TopicInfo topics;
+//   ros::master::getTopics( topics );
+// 
+//   // Loop through all published topics
+//   ros::master::V_TopicInfo::iterator it;
+//   for( it = topics.begin(); it != topics.end(); ++it )
+//   {
+//     const ros::master::TopicInfo& topic = *it;
+// 
+//     // Only add topics whose type matches.
+//     if( topic.datatype == std_message_type )
+//     {
+//       addOptionStd( topic.name );
+//     }
+//   }
+//   sortOptions();
+//   QApplication::restoreOverrideCursor();
 }
 
 } // end namespace rviz

@@ -245,5 +245,5 @@ void ImageDisplay::processMessage(const sensor_msgs::Image::ConstPtr& msg)
 
 } // namespace rviz
 
-#include <pluginlib/class_list_macros.h>
-PLUGINLIB_EXPORT_CLASS( rviz::ImageDisplay, rviz::Display )
+// #include <pluginlib/class_list_macros.h>
+// PLUGINLIB_EXPORT_CLASS( rviz::ImageDisplay, rviz::Display )

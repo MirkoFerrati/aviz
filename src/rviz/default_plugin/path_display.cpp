@@ -161,5 +161,5 @@ void PathDisplay::processMessage( const nav_msgs::Path::ConstPtr& msg )
 
 } // namespace rviz
 
-#include <pluginlib/class_list_macros.h>
-PLUGINLIB_EXPORT_CLASS( rviz::PathDisplay, rviz::Display )
+// #include <pluginlib/class_list_macros.h>
+// PLUGINLIB_EXPORT_CLASS( rviz::PathDisplay, rviz::Display )

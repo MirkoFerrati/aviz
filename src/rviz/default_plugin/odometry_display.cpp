@@ -295,5 +295,5 @@ void OdometryDisplay::setTopic( const QString &topic, const QString &datatype )
 
 } // namespace rviz
 
-#include <pluginlib/class_list_macros.h>
-PLUGINLIB_EXPORT_CLASS( rviz::OdometryDisplay, rviz::Display )
+// #include <pluginlib/class_list_macros.h>
+// PLUGINLIB_EXPORT_CLASS( rviz::OdometryDisplay, rviz::Display )
